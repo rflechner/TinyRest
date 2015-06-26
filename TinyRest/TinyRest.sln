@@ -7,6 +7,21 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TinyRest", "TinyRest\TinyRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyRest.CSharpExample", "TinyRest.CSharpExample\TinyRest.CSharpExample.csproj", "{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A1CFF92-2DFB-4F15-A0E7-3E2E087BDA5A}"
+	ProjectSection(SolutionItems) = preProject
+		build.bat = build.bat
+		build.fsx = build.fsx
+		TinyRest.nuspec = TinyRest.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F050DD80-3B8F-4AEE-BE3F-72A927CCEC7E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

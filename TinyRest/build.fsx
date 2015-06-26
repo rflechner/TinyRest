@@ -5,7 +5,7 @@ open Fake
 let buildDir = "./build/"
 let packagingDir = "./packaging/"
 let packagingRoot = "./packagingRoot/"
-let buildVersion = "1.0"
+let buildVersion = "1.1"
 
 buildDir |> ensureDirectory
 packagingDir |> ensureDirectory
@@ -32,10 +32,12 @@ Target "CreatePackage" (fun _ ->
                 Version = buildVersion
                 AccessKey = ""
                 Publish = false
-                Files = (allPackageFiles |> Seq.map (fun f -> (f,None,None)) |> Seq.toList)
+//                Files = (allPackageFiles |> Seq.map (fun f -> (f,None,None)) |> Seq.toList)
+                Files = [ ("*.*", Some "lib", None) ]
                 Dependencies = [
                                     "Newtonsoft.Json", GetPackageVersion "./packages/" "Newtonsoft.Json"
                                ]
+//                References = ["build/TinyRest.dll"]
              }) 
             "TinyRest.nuspec"
 )
