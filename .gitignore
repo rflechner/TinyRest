@@ -1,4 +1,7 @@
 obj/
 bin/
+build/
+packaging/
+packagingRoot/
 packages/
 *.v12.suo
