@@ -14,25 +14,28 @@ packagingRoot |> ensureDirectory
 Target "Clean" (fun _ ->
     CleanDir buildDir
     CleanDir packagingDir
+    CleanDir packagingRoot
 )
 
 Target "CreatePackage" (fun _ ->
-    let allPackageFiles = buildDir |> directoryInfo |> filesInDir |> Seq.map (fun f -> f.FullName)
+    let allPackageFiles = buildDir |> directoryInfo |> filesInDir |> Seq.map (fun f -> f.FullName) |> Seq.filter (fun f -> f.Contains "Newtonsoft.Json" |> not)
     CopyFiles packagingDir allPackageFiles
 
     NuGet (fun p -> 
-        {p with
-            Authors = ["rflechner"]
-            Project = "TinyRest"
-            Description = "A tiny FSharp and CSharp Rest server"
-            OutputPath = packagingRoot
-            Summary = "A tiny FSharp and CSharp Rest server"
-            WorkingDir = packagingDir
-            Version = buildVersion
-            AccessKey = ""
-            Publish = false
-            //Files = [(@"tools\**\*.*", None, None)]
-            Files = (allPackageFiles |> Seq.map (fun f -> (f,None,None)) |> Seq.toList)
+            {p with
+                Authors = ["rflechner"]
+                Project = "TinyRest"
+                Description = "A tiny FSharp and CSharp Rest server"
+                OutputPath = packagingRoot
+                Summary = "A tiny FSharp and CSharp Rest server"
+                WorkingDir = packagingDir
+                Version = buildVersion
+                AccessKey = ""
+                Publish = false
+                Files = (allPackageFiles |> Seq.map (fun f -> (f,None,None)) |> Seq.toList)
+                Dependencies = [
+                                    "Newtonsoft.Json", GetPackageVersion "./packages/" "Newtonsoft.Json"
+                               ]
              }) 
             "TinyRest.nuspec"
 )
