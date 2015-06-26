@@ -1,6 +1,12 @@
 # TinyRest
 A tiny FSharp and CSharp Rest server written in F#
 
+# Install
+
+A nuget package exists hehe: https://www.nuget.org/packages/TinyRest/
+
+	PM> Install-Package TinyRest
+
 # Usage in FSharp
 
 There an example of a simple file server here: 
