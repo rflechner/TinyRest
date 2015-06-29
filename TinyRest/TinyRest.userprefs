@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="TinyRest.Droid.Example\TinyRest.Droid.Example.fsproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.1c01b4b4" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="TinyRest\TinyRestServer-sample.fsx">
+    <Files>
+      <File FileName="TinyRest.Droid.Example\MainActivity.fs" Line="67" Column="96" />
+      <File FileName="TinyRest-PCL\TinyRestPcl.fs" Line="185" Column="22" />
+      <File FileName="TinyRest\TinyRestServer-sample.fsx" Line="101" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

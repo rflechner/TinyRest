@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TinyRest", "TinyRest\TinyRest.fsproj", "{4968FE42-5346-419F-AD92-8B0AD866A10D}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest", "TinyRest\TinyRest.fsproj", "{4968FE42-5346-419F-AD92-8B0AD866A10D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyRest.CSharpExample", "TinyRest.CSharpExample\TinyRest.CSharpExample.csproj", "{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}"
 EndProject
@@ -22,7 +22,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F050DD
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TinyRest-PCL", "TinyRest-PCL\TinyRest-PCL.fsproj", "{934B5323-D59F-49BC-AC5C-ECAA5CE10803}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest-PCL", "TinyRest-PCL\TinyRest-PCL.fsproj", "{934B5323-D59F-49BC-AC5C-ECAA5CE10803}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{B7E1EAC1-1322-401C-AFA0-57EF57180EBF}"
+EndProject
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest.Droid", "TinyRest.Droid\TinyRest.Droid.fsproj", "{594E12D5-D071-41E0-ACA7-84B72CB6B707}"
+EndProject
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest.Droid.Example", "TinyRest.Droid.Example\TinyRest.Droid.Example.fsproj", "{8435EBAA-F90A-4D57-BF8F-91470E65F72A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,14 +40,28 @@ Global
 		{4968FE42-5346-419F-AD92-8B0AD866A10D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4968FE42-5346-419F-AD92-8B0AD866A10D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4968FE42-5346-419F-AD92-8B0AD866A10D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{594E12D5-D071-41E0-ACA7-84B72CB6B707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{594E12D5-D071-41E0-ACA7-84B72CB6B707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{594E12D5-D071-41E0-ACA7-84B72CB6B707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{594E12D5-D071-41E0-ACA7-84B72CB6B707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8435EBAA-F90A-4D57-BF8F-91470E65F72A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8435EBAA-F90A-4D57-BF8F-91470E65F72A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8435EBAA-F90A-4D57-BF8F-91470E65F72A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8435EBAA-F90A-4D57-BF8F-91470E65F72A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8435EBAA-F90A-4D57-BF8F-91470E65F72A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8435EBAA-F90A-4D57-BF8F-91470E65F72A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{934B5323-D59F-49BC-AC5C-ECAA5CE10803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{934B5323-D59F-49BC-AC5C-ECAA5CE10803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{934B5323-D59F-49BC-AC5C-ECAA5CE10803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{934B5323-D59F-49BC-AC5C-ECAA5CE10803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{594E12D5-D071-41E0-ACA7-84B72CB6B707} = {B7E1EAC1-1322-401C-AFA0-57EF57180EBF}
+		{8435EBAA-F90A-4D57-BF8F-91470E65F72A} = {B7E1EAC1-1322-401C-AFA0-57EF57180EBF}
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -80,6 +80,7 @@ let download (q:IHttpRequest) (r:IHttpResponse) =
 
 let routes = [
                 GET (Path("/")) <| fun q r -> text "coucou"
+                GET (Path("/ip")) <| fun q r -> text (q.RemoteEndPoint.IpAddress)
                 get "/bye" <| fun q r -> text "bye bye\n@++"
                 getPattern "/haha/(.*)" <| fun q r -> text "ha ha"
                 GET (Path("/files")) <| listFiles
