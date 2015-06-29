@@ -49,6 +49,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
+      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
+      <Name>TinyRest-PCL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TinyRest\TinyRest.fsproj">
       <Project>{4968fe42-5346-419f-ad92-8b0ad866a10d}</Project>
       <Name>TinyRest</Name>

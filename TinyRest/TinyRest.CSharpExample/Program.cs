@@ -10,6 +10,7 @@ namespace TinyRest.CSharpExample
         private static void Main(string[] args)
         {
             TinyRestServerCSharp.TinyRest.Server()
+                .WithLogger(new TinyRestServer.ConsoleLogger())
                 .WithHttp()
                 .WithPort(8001)
                 .WithBasePath("/learning")

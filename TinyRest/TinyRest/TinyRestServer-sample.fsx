@@ -7,9 +7,13 @@ open System.IO
 open System.Xml.Linq
 open System.Collections.Generic
     
+#load "../TinyRest-PCL/TinyRestPcl.fs"
 #load "TinyRestServer.fs"
 
+open TinyRestServerPCL
 open TinyRestServer
+
+let logger = new ConsoleLogger()
 
 let combine p1 p2 = Path.Combine(p1, p2)
 let dir p = Directory.EnumerateFileSystemEntries p
@@ -23,12 +27,12 @@ let container (name:string) (attrs:XAttribute list) (children:XElement list) =
 
 let attr name text = new XAttribute(XName.Get(name), text)
 
-let listFiles (q:HttpListenerRequest) (r:HttpListenerResponse) =
+let listFiles (q:IHttpRequest) (r:IHttpResponse) =
     let usr = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
     let homeDir = combine usr "Downloads"
-    let p = if q.QueryString.["p"] |> String.IsNullOrWhiteSpace |> not then 
-                combine homeDir (q.QueryString.["p"] |> skipStart "\\" |> skipStart "/")
-            else homeDir
+    let p = match q.QueryString |> getVal "p" with
+             | Some v -> combine homeDir (v |> skipStart "\\" |> skipStart "/")
+             | None   -> homeDir
     let dirs = seq  {
                       for d in p |> Directory.EnumerateDirectories do
                         let rel = d.Substring homeDir.Length
@@ -62,18 +66,17 @@ let listFiles (q:HttpListenerRequest) (r:HttpListenerResponse) =
     let h = container "html" [] [ container "body" [] body ]
     h.ToString() |> html
 
-let download (q:HttpListenerRequest) (r:HttpListenerResponse) =
+let download (q:IHttpRequest) (r:IHttpResponse) =
     let usr = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
     let homeDir = combine usr "Downloads"
-    let p = if q.QueryString.["p"] |> String.IsNullOrWhiteSpace |> not then 
-                combine homeDir (q.QueryString.["p"] |> skipStart "\\" |> skipStart "/")
-            else
-                homeDir
+    let p = match q.QueryString |> getVal "p" with
+             | Some v -> combine homeDir (v |> skipStart "\\" |> skipStart "/")
+             | None   -> homeDir
     if File.Exists p then
         r.AddHeader("Content-Disposition", "Attachment;filename=" + Path.GetFileName(p))
-        new StaticFileReply(p) :> IHttpReply
+        new StaticFileReply(p,logger) :> IHttpReply
     else
-        new ErrorHttpReply("Cannot find file") :> IHttpReply
+        new ErrorHttpReply("Cannot find file", logger) :> IHttpReply
 
 let routes = [
                 GET (Path("/")) <| fun q r -> text "coucou"
@@ -83,9 +86,11 @@ let routes = [
                 get "/download" <| download
              ]
 
-let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; }
+let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; Logger=Some(logger :> ILogger); }
 
-listen conf
+let listener = new Listener()
+
+listener |> listen conf
 
 
 
