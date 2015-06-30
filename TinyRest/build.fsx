@@ -9,7 +9,7 @@ let buildIosDir = "./buildIos/"
 
 let packagingDir = "./packaging/"
 let packagingRoot = "./packagingRoot/"
-let buildVersion = "1.1"
+let buildVersion = "1.2"
 
 buildPclDir |> ensureDirectory
 buildLibDir |> ensureDirectory
@@ -21,7 +21,7 @@ packagingRoot |> ensureDirectory
 
 let keyFile = @"C:\keys\nuget-romcyber.txt"
 let nugetApiKey = if keyFile |> fileExists then keyFile |> ReadFileAsString else ""
-tracefn "Nuget API key is %s" nugetApiKey
+tracefn "Nuget API key is '%s'" nugetApiKey
 let publishNuget = false
 
 Target "Clean" (fun _ ->
