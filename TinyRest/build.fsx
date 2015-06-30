@@ -9,7 +9,7 @@ let buildIosDir = "./buildIos/"
 
 let packagingDir = "./packaging/"
 let packagingRoot = "./packagingRoot/"
-let buildVersion = "1.2.2"
+let buildVersion = "1.2.3"
 
 buildPclDir |> ensureDirectory
 buildLibDir |> ensureDirectory
@@ -64,7 +64,7 @@ Target "CreateLibPackage" (fun _ ->
                         |> directoryInfo 
                         |> filesInDir 
                         |> Seq.map (fun f -> f.FullName) 
-                        |> Seq.filter (fun f -> (f.Contains "Newtonsoft" |> not) && (f.Contains  "TinyRest_PCL" |> not))
+                        |> Seq.filter (fun f -> f.Contains "TinyRest.dll")
     CopyFiles packagingDir packFiles
 
     NuGet (fun p -> 
@@ -84,6 +84,7 @@ Target "CreateLibPackage" (fun _ ->
                 Dependencies = [
                                     "Newtonsoft.Json", GetPackageVersion "./packages/" "Newtonsoft.Json"
                                     "TinyRest-PCL", buildVersion
+                                    "FSharp.Core", GetPackageVersion "./packages/" "FSharp.Core"
                                ]
              })
             "TinyRest.nuspec"
