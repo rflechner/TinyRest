@@ -57,19 +57,12 @@ type RootViewController () =
         this.View.Add(textView)
 
         button.TouchDown.Add(fun s -> 
-                let routes = [
-                            GET (Path("/")) <| fun q r -> text "coucou"
-                            get "/bye" <| fun q r -> text "bye bye\n@++"
-                            getPattern "/haha/(.*)" <| fun q r -> text "ha ha"
-                         ]
-
                 let logger = new UiLogger(textView)
-                let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; Logger=Some(logger :> ILogger); }
                 let listener = new Listener()
           
                 async {
                     
-                    listener |> listen conf |> ignore
+                    ServiceImplementation.startServer listener logger
 
                     let client = new WebClient()
                     let content = client.DownloadString(new Uri("http://localhost:8009/TinyRest1"))

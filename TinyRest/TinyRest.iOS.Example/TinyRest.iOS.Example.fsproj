@@ -125,5 +125,10 @@
       <IsAppExtension>false</IsAppExtension>
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
+    <ProjectReference Include="..\TinyRest.PclExample\TinyRest.PclExample.fsproj">
+      <Name>TinyRest.PclExample</Name>
+      <Project>{01305b61-a0ee-462a-af7c-041a0d014e7c}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -81,5 +81,10 @@
       <Name>TinyRest.Droid</Name>
       <Project>{594E12D5-D071-41E0-ACA7-84B72CB6B707}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TinyRest.PclExample\TinyRest.PclExample.fsproj">
+      <Name>TinyRest.PclExample</Name>
+      <Project>{01305b61-a0ee-462a-af7c-041a0d014e7c}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>
