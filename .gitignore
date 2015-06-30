@@ -1,6 +1,10 @@
 obj/
 bin/
 build/
+buildIos/
+buildDroid/
+buildLib/
+buildPcl/
 packaging/
 packagingRoot/
 packages/

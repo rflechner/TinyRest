@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>@description@</description>
     <releaseNotes>@releaseNotes@</releaseNotes>
-    <tags>Tiny Rest Http Server</tags>
+    <tags>@tags@</tags>
     @dependencies@
     @references@
   </metadata>
