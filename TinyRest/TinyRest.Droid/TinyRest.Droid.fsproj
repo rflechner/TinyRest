@@ -58,12 +58,13 @@
     <Compile Include="Properties\AssemblyInfo.fs" />
     <Compile Include="TinyRestServer.fs" />
     <Compile Include="TinyRestServerCSharp.fs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core">
       <Private>True</Private>
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />

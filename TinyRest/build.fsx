@@ -9,7 +9,7 @@ let buildIosDir = "./buildIos/"
 
 let packagingDir = "./packaging/"
 let packagingRoot = "./packagingRoot/"
-let buildVersion = "1.2"
+let buildVersion = "1.2.2"
 
 buildPclDir |> ensureDirectory
 buildLibDir |> ensureDirectory
@@ -36,7 +36,7 @@ Target "Clean" (fun _ ->
 
 Target "CreatePclPackage" (fun _ ->
     CleanDir packagingDir
-    let packFiles = buildPclDir |> directoryInfo |> filesInDir |> Seq.map (fun f -> f.FullName) //|> Seq.filter (fun f -> f.Contains "TinyRest_PCL.dll")
+    let packFiles = buildPclDir |> directoryInfo |> filesInDir |> Seq.map (fun f -> f.FullName) |> Seq.filter (fun f -> f.Contains "TinyRest_PCL.dll")
     CopyFiles packagingDir packFiles
 
     NuGet (fun p -> 
@@ -52,7 +52,7 @@ Target "CreatePclPackage" (fun _ ->
                 Tags = "Tiny Rest Http Server PCL"
                 AccessKey = keyFile
                 Publish = publishNuget
-                Files = [ ("*.*", Some @"lib\portable-net40+sl5+wp80+win8+wpa81", None) ]
+                Files = [ ("*.*", Some @"lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10", None) ]
                 Dependencies = []
              }) 
             "TinyRest.nuspec"
@@ -95,7 +95,7 @@ Target "CreateDroidPackage" (fun _ ->
                         |> directoryInfo 
                         |> filesInDir 
                         |> Seq.map (fun f -> f.FullName) 
-                        |> Seq.filter (fun f -> (f.Contains "Newtonsoft" |> not) && (f.Contains  "TinyRest_PCL" |> not))
+                        |> Seq.filter (fun f -> (f.Contains "TinyRest.Droid"))
     CopyFiles packagingDir packFiles
 
     NuGet (fun p -> 
@@ -113,8 +113,8 @@ Target "CreateDroidPackage" (fun _ ->
                 Publish = publishNuget
                 Files = [ ("*.*", Some @"lib\MonoAndroid", None) ]
                 Dependencies = [
-                                    "Newtonsoft.Json", GetPackageVersion "./packages/" "Newtonsoft.Json"
                                     "TinyRest-PCL", buildVersion
+                                    "FSharp.Core", GetPackageVersion "./packages/" "FSharp.Core"
                                ]
              })
             "TinyRest.nuspec"
@@ -147,7 +147,6 @@ Target "CreateIosPackage" (fun _ ->
                             ("*.*", Some @"lib\MonoTouch", None)
                         ]
                 Dependencies = [
-                                    "Newtonsoft.Json", GetPackageVersion "./packages/" "Newtonsoft.Json"
                                     "TinyRest-PCL", buildVersion
                                ]
              })

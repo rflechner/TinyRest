@@ -50,7 +50,6 @@ type MainActivity () =
                  
                 ServiceImplementation.startServer listener logger
 
-
                 let client = new WebClient()
                 let content = client.DownloadString(new Uri("http://localhost:8009/TinyRest1"))
                 Debug.WriteLine(content)
