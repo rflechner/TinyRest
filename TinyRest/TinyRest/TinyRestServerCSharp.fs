@@ -48,6 +48,16 @@
             routes.Add r
             x
 
+        member x.OnPutPattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = PUT (Regex(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
+            routes.Add r
+            x
+
+        member x.OnDeletePattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = DELETE (Regex(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
+            routes.Add r
+            x
+
         member x.OnPostPattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
             let r = POST (Regex(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
             routes.Add r
@@ -60,6 +70,16 @@
 
         member x.OnPostPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
             let r = POST (Path(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
+            routes.Add r
+            x
+
+        member x.OnPutPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = PUT (Path(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
+            routes.Add r
+            x
+
+        member x.OnDeletePath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = DELETE (Path(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
             routes.Add r
             x
 

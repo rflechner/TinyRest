@@ -13,12 +13,15 @@ namespace TinyRest.CSharpExample
                 .WithLogger(new TinyRestServer.ConsoleLogger())
                 .WithHttp()
                 .WithPort(8001)
-                .WithBasePath("/learning")
+                .WithBasePath("/ApiMocking")
                 .OnGetPath("/", (request, response) => "coucou " + (count++))
                 .OnGetPath("/json", (request, response) => response.Json(new
                 {
                     Text = "coucou " + (count++)
                 }))
+                .OnGetPath("/api/v1/accounts/forgot-passwords", (request, response) => "ça marche")
+                .OnGetPath("/api/authorize", (request, response) => "ça log")
+                
                 .Create()
                 .Listen();
 

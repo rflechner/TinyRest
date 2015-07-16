@@ -297,7 +297,47 @@
     let delete p f = DELETE (Path(p)) <| f
     let deletePattern p f = DELETE (Regex(p)) <| f
 
-    
+
+    type FluentHttpReply(f:Action<IHttpRequest, IHttpResponse>) =
+       interface IHttpReply with
+            member x.Send q r =
+                async {
+                    f.Invoke(q,r)
+                    close r None
+                }
+
+    type RoutesBuilder () =
+        let mutable routes:HttpRoute seq = Seq.empty
+        let toFluentReply f = new FluentHttpReply(f) :> IHttpReply
+
+        member x.OnGetPattern (p, a:Action<IHttpRequest, IHttpResponse>) =
+            let r = GET (Regex(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+            routes <- routes |> Seq.append [r]
+            x
+
+        member x.OnPostPattern (p, a:Action<IHttpRequest, IHttpResponse>) =
+            let r = POST (Regex(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+            routes <- routes |> Seq.append [r]
+            x
+
+        member x.OnGetPath (p, a:Action<IHttpRequest, IHttpResponse>) =
+            let r = GET (Path(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+            routes <- routes |> Seq.append [r]
+            x
+
+        member x.OnPostPath (p, a:Action<IHttpRequest, IHttpResponse>) =
+            let r = POST (Path(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+            routes <- routes |> Seq.append [r]
+            x
+
+        member x.AddPath (verb, path, a:Action<IHttpRequest, IHttpResponse>) =
+            let r = match verb with
+                    | HttpVerb.Get -> GET (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+                    | HttpVerb.Post -> POST (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+                    | HttpVerb.Put -> PUT (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+                    | HttpVerb.Delete -> DELETE (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
+            routes <- routes |> Seq.append [r]
+            x
 
 
 
