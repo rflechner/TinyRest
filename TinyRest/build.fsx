@@ -9,7 +9,7 @@ let buildIosDir = "./buildIos/"
 
 let packagingDir = "./packaging/"
 let packagingRoot = "./packagingRoot/"
-let buildVersion = "1.2.3"
+let buildVersion = "1.2.4"
 
 buildPclDir |> ensureDirectory
 buildLibDir |> ensureDirectory
