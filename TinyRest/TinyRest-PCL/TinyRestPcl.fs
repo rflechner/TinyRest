@@ -4,6 +4,7 @@
     open System.Text
     open System.Text.RegularExpressions
     open System.Net
+    open System.IO
 
     type HttpSchema = 
         | Http
@@ -259,6 +260,31 @@
     let text s = new TextHttpReply(s) :> IHttpReply
     let html s = new TextHttpReply(s) :> IHttpReply
 
+    type IOjectModelSerializer =
+        abstract member Serialize<'t> : 't * target:Stream -> unit
+
+    type ObjectModelHttpReply<'t>(model:'t, serializer:IOjectModelSerializer, contentType:string, ?logger:ILogger) =
+       interface IHttpReply with
+            member x.Send _ r =
+                async {
+                    r.ContentType <- contentType
+                    serializer.Serialize(model, r.OutputStream)
+                    close r logger
+                }
+
+    type JsonModelSerializer() =
+        interface IOjectModelSerializer with
+            member x.Serialize<'t> (m:'t,target:Stream) =
+                let out = m |> Newtonsoft.Json.JsonConvert.SerializeObject |> Text.Encoding.UTF8.GetBytes
+                target.Write(out,0,out.Length)
+                target.Flush()
+
+    let sendModel<'t, 's when 's :> IOjectModelSerializer> (m:'t) contentType (s:unit -> 's) = 
+        ObjectModelHttpReply(m, s(), contentType) :> IHttpReply
+    
+    let json m =
+        sendModel m "application/json" <| fun _ -> JsonModelSerializer() :> IOjectModelSerializer
+    
     let toHex (c:char) = Convert.ToInt32(c) |> fun i -> i.ToString("X")
     let encode s = 
         let parts = s |> Seq.map (fun c -> "%" + (c |> toHex))

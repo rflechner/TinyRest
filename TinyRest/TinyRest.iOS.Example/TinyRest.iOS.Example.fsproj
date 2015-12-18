@@ -105,14 +105,16 @@
     <Compile Include="RootViewController.fs" />
     <Compile Include="AppDelegate.fs" />
     <None Include="GettingStarted.Xamarin" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Core">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
       <Name>TinyRest-PCL</Name>
       <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>

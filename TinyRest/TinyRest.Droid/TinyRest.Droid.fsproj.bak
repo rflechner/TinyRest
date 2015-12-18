@@ -5,24 +5,23 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{F2A71F9B-5D33-465A-A702-920D77279786}</ProjectTypeGuids>
-    <ProjectGuid>{8435EBAA-F90A-4D57-BF8F-91470E65F72A}</ProjectGuid>
+    <ProjectGuid>{594E12D5-D071-41E0-ACA7-84B72CB6B707}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TinyRest.Droid.Example</RootNamespace>
+    <RootNamespace>TinyRest.Droid</RootNamespace>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidResgenFile>Resources\Resource.designer.fs</AndroidResgenFile>
-    <AndroidApplication>True</AndroidApplication>
-    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <AssemblyName>TinyRest.Droid.Example</AssemblyName>
-    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <AndroidApplication>False</AndroidApplication>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AssemblyName>TinyRest.Droid</AssemblyName>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
     <TargetFrameworkProfile />
-    <Name>TinyRest.Droid.Example</Name>
-    <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
-    <SelectedDevice>Genymotion Google Nexus 5 - 5.0.0 - API 21 - 1080x1920</SelectedDevice>
-    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <Name>TinyRest.Droid</Name>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,13 +54,11 @@
     <AndroidAsset Include="Assets\AboutAssets.txt" />
     <Compile Include="Resources\Resource.designer.fs" />
     <None Include="Resources\AboutResources.txt" />
-    <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\drawable\Icon.png" />
     <Compile Include="Properties\AssemblyInfo.fs" />
-    <Content Include="Properties\AndroidManifest.xml" />
-    <Compile Include="MainActivity.fs" />
-    <Content Include="packages.config" />
+    <Compile Include="TinyRestServer.fs" />
+    <Compile Include="TinyRestServerCSharp.fs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
@@ -78,14 +75,12 @@
       <Name>TinyRest-PCL</Name>
       <Project>{934B5323-D59F-49BC-AC5C-ECAA5CE10803}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TinyRest.Droid\TinyRest.Droid.fsproj">
-      <Name>TinyRest.Droid</Name>
-      <Project>{594E12D5-D071-41E0-ACA7-84B72CB6B707}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TinyRest.PclExample\TinyRest.PclExample.fsproj">
-      <Name>TinyRest.PclExample</Name>
-      <Project>{01305b61-a0ee-462a-af7c-041a0d014e7c}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>
