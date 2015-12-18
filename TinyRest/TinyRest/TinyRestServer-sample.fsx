@@ -8,9 +8,13 @@ open System.IO
 open System.Xml.Linq
 open System.Collections.Generic
     
+#load "../TinyRest-PCL/Http.fs"
+#load "../TinyRest-PCL/Routing.fs"
 #load "../TinyRest-PCL/TinyRestPcl.fs"
 #load "TinyRestServer.fs"
 
+open Http
+open Routing
 open TinyRestServerPCL
 open TinyRestServer
 
@@ -93,6 +97,7 @@ let routes = [
                 get "/download" <| download
                 get "/user" <| fun _ _ -> json {Login="Romain"; Email="rflechner@romcyber.com"; Birth=DateTime(1985, 02, 11)}
                 //get "/user/%s/%d" <| fun login id -> "coucou"
+                //GET (Format "/user?login=%s")
              ]
 
 let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; Logger=Some(logger :> ILogger); }
