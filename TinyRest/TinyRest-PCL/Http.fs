@@ -44,7 +44,7 @@
         abstract member RawUrl : string
         abstract member RemoteEndPoint : IPEndPoint
         abstract member RequestTraceIdentifier : Guid
-        abstract member TransportContext : TransportContext
+        //abstract member TransportContext : TransportContext
         abstract member Url : Uri
         abstract member UrlReferrer : Uri
         abstract member UserAgent : string

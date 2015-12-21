@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>69aff4c6-c1f0-443d-95cf-c287be578b33</ProjectGuid>
+    <ProjectGuid>{69AFF4C6-C1F0-443D-95CF-C287BE578B33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>TinyRest.Pcl47</RootNamespace>
     <AssemblyName>TinyRest.Pcl47</AssemblyName>
@@ -17,7 +16,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
     <OutputPath>bin\Debug\</OutputPath>
@@ -33,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\Release\TinyRest.Pcl47.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
@@ -43,8 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="PortableLibrary1.fs" />
-    <None Include="Script.fsx" />
+    <Compile Include="..\TinyRest-PCL\Http.fs">
+      <Link>Http.fs</Link>
+    </Compile>
+    <Compile Include="..\TinyRest-PCL\Routing.fs">
+      <Link>Routing.fs</Link>
+    </Compile>
+    <Compile Include="..\TinyRest-PCL\TinyRestPcl.fs">
+      <Link>TinyRestPcl.fs</Link>
+    </Compile>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
