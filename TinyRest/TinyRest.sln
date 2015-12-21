@@ -32,8 +32,6 @@ Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest.Droid.Example", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ios", "Ios", "{A4F36B24-642B-45C2-A3D5-3090B74CD67D}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest.iOS.Example", "TinyRest.iOS.Example\TinyRest.iOS.Example.fsproj", "{B962BBAF-4225-413B-B573-74FCD7F2EDBE}"
-EndProject
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest.iOS.Core", "TinyRest.iOS.Core\TinyRest.iOS.Core.fsproj", "{0EEC2269-739A-43C7-A104-81F083695915}"
 EndProject
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "TinyRest.iOS.Sample", "TinyRest.iOS.Sample\TinyRest.iOS.Sample.fsproj", "{5163A1A8-D45B-4289-8BDB-6C31260414D5}"
@@ -415,34 +413,6 @@ Global
 		{A150BFF4-DFDB-4B0C-AD7F-DB1E7BFF544D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{A150BFF4-DFDB-4B0C-AD7F-DB1E7BFF544D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A150BFF4-DFDB-4B0C-AD7F-DB1E7BFF544D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Ad-Hoc|Any CPU.ActiveCfg = Ad-Hoc|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Ad-Hoc|iPhoneSimulator.Build.0 = Ad-Hoc|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Ad-Hoc|Mixed Platforms.ActiveCfg = Ad-Hoc|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Ad-Hoc|Mixed Platforms.Build.0 = Ad-Hoc|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.AppStore|Any CPU.ActiveCfg = AppStore|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.AppStore|Mixed Platforms.ActiveCfg = AppStore|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.AppStore|Mixed Platforms.Build.0 = AppStore|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Debug|Any CPU.ActiveCfg = Debug|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Debug|iPhone.Build.0 = Debug|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Debug|Mixed Platforms.ActiveCfg = Debug|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Debug|Mixed Platforms.Build.0 = Debug|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Release|Any CPU.ActiveCfg = Release|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Release|iPhone.ActiveCfg = Release|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Release|iPhone.Build.0 = Release|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Release|Mixed Platforms.ActiveCfg = Release|iPhone
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE}.Release|Mixed Platforms.Build.0 = Release|iPhone
 		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{E59A5690-3CA0-4BE2-A65B-A82D1C7D0016}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
@@ -471,7 +441,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{594E12D5-D071-41E0-ACA7-84B72CB6B707} = {B7E1EAC1-1322-401C-AFA0-57EF57180EBF}
 		{8435EBAA-F90A-4D57-BF8F-91470E65F72A} = {B7E1EAC1-1322-401C-AFA0-57EF57180EBF}
-		{B962BBAF-4225-413B-B573-74FCD7F2EDBE} = {A4F36B24-642B-45C2-A3D5-3090B74CD67D}
 		{0EEC2269-739A-43C7-A104-81F083695915} = {A4F36B24-642B-45C2-A3D5-3090B74CD67D}
 		{5163A1A8-D45B-4289-8BDB-6C31260414D5} = {A4F36B24-642B-45C2-A3D5-3090B74CD67D}
 	EndGlobalSection

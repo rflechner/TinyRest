@@ -108,9 +108,9 @@
     <Compile Include="..\TinyRest.PclExample\ServiceImplementation.fs">
       <Link>ServiceImplementation.fs</Link>
     </Compile>
+    <Compile Include="RootViewController.fs" />
     <Compile Include="AppDelegate.fs" />
     <Compile Include="Main.fs" />
-    <Compile Include="RootViewController.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.FSharp.targets" />
   <ItemGroup>
