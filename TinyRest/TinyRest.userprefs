@@ -1,6 +1,11 @@
-﻿<Properties StartupItem="TinyRest.iOS.Example/TinyRest.iOS.Example.fsproj">
+﻿<Properties StartupItem="TinyRest.iOS.Sample/TinyRest.iOS.Sample.fsproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6s.9.2" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="TinyRest.iOS.Sample/AppDelegate.fs">
+    <Files>
+      <File FileName="TinyRest.iOS.Sample/RootViewController.fs" Line="6" Column="1" />
+      <File FileName="TinyRest.iOS.Sample/AppDelegate.fs" Line="17" Column="42" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

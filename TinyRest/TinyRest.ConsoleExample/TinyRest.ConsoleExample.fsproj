@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>a150bff4-dfdb-4b0c-ad7f-db1e7bff544d</ProjectGuid>
+    <ProjectGuid>{A150BFF4-DFDB-4B0C-AD7F-DB1E7BFF544D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>TinyRest.ConsoleExample</RootNamespace>
     <AssemblyName>TinyRest.ConsoleExample</AssemblyName>
@@ -17,7 +16,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
     <OutputPath>bin\Debug\</OutputPath>
@@ -37,6 +35,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Release\TinyRest.ConsoleExample.XML</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -63,7 +62,6 @@
   <ItemGroup>
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -71,13 +69,11 @@
     <Reference Include="System.Numerics" />
     <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
       <Name>TinyRest-PCL</Name>
-      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
-      <Private>True</Private>
+      <Project>{934B5323-D59F-49BC-AC5C-ECAA5CE10803}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TinyRest\TinyRest.fsproj">
       <Name>TinyRest</Name>
-      <Project>{4968fe42-5346-419f-ad92-8b0ad866a10d}</Project>
-      <Private>True</Private>
+      <Project>{4968FE42-5346-419F-AD92-8B0AD866A10D}</Project>
     </ProjectReference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />

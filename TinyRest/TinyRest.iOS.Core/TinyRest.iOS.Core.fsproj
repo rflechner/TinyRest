@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{F2A71F9B-5D33-465A-A702-920D77279786}</ProjectTypeGuids>
-    <ProjectGuid>0eec2269-739a-43c7-a104-81f083695915</ProjectGuid>
+    <ProjectGuid>{0EEC2269-739A-43C7-A104-81F083695915}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>TinyRest.iOS.Core</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
@@ -32,6 +32,15 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.FSharp.targets" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="..\TinyRest-PCL\Http.fs">
+      <Link>Http.fs</Link>
+    </Compile>
+    <Compile Include="..\TinyRest-PCL\Routing.fs">
+      <Link>Routing.fs</Link>
+    </Compile>
+    <Compile Include="..\TinyRest-PCL\TinyRestPcl.fs">
+      <Link>TinyRestPcl.fs</Link>
+    </Compile>
     <Compile Include="TinyRestServer.fs" />
     <Compile Include="TinyRestServerCSharp.fs" />
     <Content Include="packages.config" />
@@ -39,16 +48,10 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
-      <Name>TinyRest-PCL</Name>
-      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
 </Project>
