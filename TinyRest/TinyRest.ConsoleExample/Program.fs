@@ -1,17 +1,9 @@
-﻿#r "System.Xml.Linq.dll"
-#r "..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll"
-
-open System
+﻿open System
 open System.Net
 open System.Text
 open System.IO
 open System.Xml.Linq
 open System.Collections.Generic
-    
-#load "../TinyRest-PCL/Http.fs"
-#load "../TinyRest-PCL/Routing.fs"
-#load "../TinyRest-PCL/TinyRestPcl.fs"
-#load "TinyRestServer.fs"
 
 open Http
 open Routing
@@ -87,28 +79,21 @@ let download (q:IHttpRequest) (r:IHttpResponse) =
         new StaticFileReply(p,logger) :> IHttpReply
     else
         new ErrorHttpReply("Cannot find file", logger) :> IHttpReply
-//
-//let routes = [
-//                GET (Path("/")) <| fun q r -> text "coucou"
-//                GET (Path("/ip")) <| fun q r -> text q.RemoteEndPoint.IpAddress
-//                get "/bye" <| fun q r -> text "bye bye\n@++"
-//                getPattern "/haha/(.*)" <| fun q r -> text "ha ha"
-//                GET (Path("/files")) <| listFiles
-//                get "/download" <| download
-//                get "/user" <| fun _ _ -> json {Login="Romain"; Email="rflechner@romcyber.com"; Birth=DateTime(1985, 02, 11)}
-//                //get "/user/%s/%d" <| fun login id -> "coucou"
-//                //GET (Format "/user?login=%s")
-//             ]
 
-let routes = 
-    GET [
-        path "/" <| fun p -> text "coucou"
-    ]
 
-let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; Logger=Some(logger :> ILogger); }
-let listener = new Listener()
-listener |> listen conf
+[<EntryPoint>]
+let main argv = 
+    let routes = 
+        GET [
+            path "/" <| fun p -> text "coucou"
+            regex "/[1-9]{2}_toto" <| fun p -> text "regex works !"
+            format "/user:%d/%s" <| fun r -> text "format works !"
+        ]
 
-Console.Read () |> ignore
+    let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; Logger=Some(logger :> ILogger); }
+    let listener = new Listener()
+    listener |> listen conf
 
+    Console.Read () |> ignore
+    0
 

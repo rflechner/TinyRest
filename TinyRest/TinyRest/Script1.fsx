@@ -1,7 +1,12 @@
-﻿open System
+﻿#load "..\TinyRest-PCL\Http.fs"
+#load "..\TinyRest-PCL\Routing.fs"
+
+open System
 open System.Text
 open System.Text.RegularExpressions
 open Microsoft.FSharp.Reflection
+
+open Routing
 
 type Url = {Absolute:string; Port:int}
 type Reply = 
@@ -26,7 +31,7 @@ urlFormat "%d" <| fun a -> () // a is an int
 
 urlFormat "%s_%d" <| fun a -> () // a is string * int
 
-urlFormat "%s_%d" <| fun (a,b) -> () // a is string and b is an int
+urlFormat "%s_%d" <| fun r -> () // a is string and b is an int
 urlFormat "%s_%d_%s_%d_%d_%s_%s-%s_%d_%s_%d_%d_%s_%s_" <| fun tuple -> ()
 
 let h1 = urlFormat "/users/auth?login=%s&password=%d"

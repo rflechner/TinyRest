@@ -5,6 +5,8 @@ open System.Text
 open System.Text.RegularExpressions
 open Microsoft.FSharp.Reflection
 
+open Http
+
 type FormatParsed =
     | StringPart
     | CharPart
@@ -90,7 +92,9 @@ type FormatParser =
         x.Parts := !x.Parts @ t
         x.Buffer := List.empty
     member x.StringBuffer skip =
-        !x.Buffer |> Seq.skip skip |> Seq.toArray |> String
+        //!x.Buffer |> Seq.skip skip |> Seq.toArray |> String
+        let c = !x.Buffer |> Seq.skip skip |> Seq.toArray
+        new String(c)
     member x.Parse (ty:Type) =
         while x.Finished() |> not do
             x.Next()
@@ -119,60 +123,160 @@ type FormatParser =
         if !x.Buffer |> Seq.isEmpty |> not then x.Push [Constant (x.StringBuffer 0)]
         { Parts = !x.Parts; Type = ty }
 
-type IRouteHandler<'t> =
-    abstract member TryHandle : string -> unit
+type IRouteHandler =
+    abstract member TryHandle<'t> : string -> IHttpRequest -> IHttpResponse -> IHttpReply option
+    abstract member Match : string -> IHttpRequest -> obj option
+
+type HttpHandler = IHttpRequest -> IHttpResponse -> IHttpReply
+
+//type RoutePattern = 
+//    | Path      of string
+//    | Regex     of string
+//    | Format    of string
+
+type HttpRoute = 
+    { Verb: HttpVerb
+     // Pattern: RoutePattern
+      Handler: IRouteHandler }
+    static member From v h =
+        { Verb = v; Handler = h }
+
+type HttpServerConfig =
+    { Schema: HttpSchema
+      Port: int
+      BasePath: string option
+      Routes: HttpRoute list
+      Logger: ILogger option }
 
 type RouteFormatHandler<'t> = 
     { Format : RouteFormat
-      Fun : 't -> unit }
+      Fun : RestRequest<'t> -> IHttpReply }
     static member New f h =
-        { Format = f
-          Fun = h }
-    member x.Match url =
-        let rec skipNextConstant (text:string) (parts:FormatPart list) (acc:string list) =
-            match parts with
-            | Constant s :: t ->
-                let i = text.ToLowerInvariant().IndexOf(s.ToLowerInvariant())
-                if i >= 0 then
-                    let start = text.Substring (0, i)
-                    let j = i + s.Length
-                    let rest = text.Substring (j, text.Length - j)
-                    skipNextConstant rest t (if i > 0 then acc @ [start] else acc)
-                else None
-            | Parsed _ :: [] -> Some (acc @ [text])
-            | _ :: t -> skipNextConstant text t acc
-            | [] -> if text.Length = 0 then Some acc else None
-        let parsed = x.Format.Parts
-                        |> List.filter (fun p -> match p with | Parsed _ -> true | _ -> false)
-        match skipNextConstant url x.Format.Parts [] with
-        | None -> None
-        | Some values when values.Length <> parsed.Length -> None
-        | Some values ->
-            let types = FSharpType.GetTupleElements(x.Format.Type)
-            let results = parsed
-                            |> List.zip values
-                            |> List.choose (fun (v,p) -> p.Match v)
-                            |> Seq.zip types
-                            |> Seq.map (
-                            fun (tupleType,(o, t)) -> 
-                                match tupleType with
-                                | v when v = typeof<int32> ->
-                                    int32(unbox<int64> o) |> box
-                                | v when v = typeof<uint32> ->
-                                    uint32(unbox<int64> o) |> box
-                                | _ -> o
-                            )
-                            |> Seq.toArray
-            Some (FSharpValue.MakeTuple(results, x.Format.Type))
-    member x.Invoke a = x.Fun a
-    interface IRouteHandler<'t> with
-        member x.TryHandle url = 
-            let m = x.Match url
+        { Format = f; Fun = h }
+    interface IRouteHandler with
+        //member x.Invoke a = x.Fun a
+        member x.Match path rq =
+            let rec skipNextConstant (text:string) (parts:FormatPart list) (acc:string list) =
+                match parts with
+                | Constant s :: t ->
+                    let i = text.ToLowerInvariant().IndexOf(s.ToLowerInvariant())
+                    if i >= 0 then
+                        let start = text.Substring (0, i)
+                        let j = i + s.Length
+                        let rest = text.Substring (j, text.Length - j)
+                        skipNextConstant rest t (if i > 0 then acc @ [start] else acc)
+                    else None
+                | Parsed _ :: [] -> Some (acc @ [text])
+                | _ :: t -> skipNextConstant text t acc
+                | [] -> if text.Length = 0 then Some acc else None
+            let parsed = x.Format.Parts
+                         |> List.filter (fun p -> match p with | Parsed _ -> true | _ -> false)
+            match skipNextConstant path x.Format.Parts [] with
+            | None -> None
+            | Some values when values.Length <> parsed.Length -> None
+            | Some values ->
+                let types = FSharpType.GetTupleElements(x.Format.Type)
+                let results = parsed
+                                |> List.zip values
+                                |> List.choose (fun (v,p) -> p.Match v)
+                                |> Seq.zip types
+                                |> Seq.map (
+                                fun (tupleType,(o, t)) -> 
+                                    match tupleType with
+                                    | v when v = typeof<int32> ->
+                                        int32(unbox<int64> o) |> box
+                                    | v when v = typeof<uint32> ->
+                                        uint32(unbox<int64> o) |> box
+                                    | _ -> o
+                                )
+                                |> Seq.toArray
+                Some (FSharpValue.MakeTuple(results, x.Format.Type))
+        member x.TryHandle path rq rs = 
+            let m = (x :> IRouteHandler).Match path rq
             match m with
-            | Some tuple -> x.Invoke (tuple :?> 't)
-            | None -> ()
+            | Some tuple -> 
+                let r = RestRequest<'t>.New rq rs (tuple :?> 't)
+                Some (x.Fun r)
+            | None -> None
 
-let urlFormat (pf : PrintfFormat<_,_,_,_,'t>) (h : 't -> unit) =
-    let f = pf.Value |> FormatParser.Create |> fun p -> p.Parse(typeof<'t>)
-    RouteFormatHandler<'t>.New f h
+let skipStart (start:string) (str:string) =
+    if str.StartsWith start |> not then
+            str
+        else
+            str.Substring(start.Length)
+
+let (|SkipStart|_|) (start:string) (stro:string option) =
+    match stro with
+    | None      -> None
+    | Some str  -> Some (skipStart start str)
+
+let ensureEndsWith e (s:string) = if s.EndsWith e then s else s + e
+let ensureStartsWith e (s:string) = if s.StartsWith e then s else e + s
+
+let (|EnsureStartsWith|_|) (start:string) (stro:string option) =
+    match stro with
+    | None      -> None
+    | Some str  -> Some (ensureStartsWith start str)
+
+let buildPrefix (c:HttpServerConfig) =
+    let b = new StringBuilder()
+    match c.Schema with
+    | Http  -> b.Append "http" |> ignore
+    | Https -> b.Append "https" |> ignore
+
+    b.Append "://*:" |> ignore
+    b.Append c.Port |> ignore
+    b.Append "/" |> ignore
+
+    match c.BasePath with
+    | None            -> ()
+    | SkipStart "/" p -> p |> ensureEndsWith "/" |> b.Append |> ignore
+    | Some p          -> p |> ensureEndsWith "/" |> b.Append |> ignore
+
+    b.ToString()
+
+//let GET pattern handler = { Verb=Get; Pattern=pattern; Handler=handler; }
+//let POST pattern handler = { Verb=Post; Pattern=pattern; Handler=handler; }
+//let PUT pattern handler = { Verb=Put; Pattern=pattern; Handler=handler; }
+//let DELETE pattern handler = { Verb=Delete; Pattern=pattern; Handler=handler; }
+
+type RoutePathHandler = 
+    { Path : string
+      Fun : RestRequest<string> -> IHttpReply }
+    static member New f h =
+        { Path = f
+          Fun = h }
+    interface IRouteHandler with
+        member x.Match path rq =
+            if x.Path = path
+            then Some (x.Path :> obj)
+            else None
+        member x.TryHandle path rq rs = 
+            let m = (x :> IRouteHandler).Match path rq
+            match m with
+            | Some _ -> 
+                let r = RestRequest<string>.New rq rs rq.RawUrl
+                Some (x.Fun r)
+            | None -> None
+
+type RouteRegexHandler = 
+    { Regex : Regex
+      Fun : RestRequest<string> -> IHttpReply }
+    static member New f h =
+        { Regex = f
+          Fun = h }
+    interface IRouteHandler with
+        member x.Match path rq = 
+            if  path |> x.Regex.IsMatch
+            then Some (path :> obj)
+            else None
+        member x.TryHandle path rq rs = 
+            let m = (x :> IRouteHandler).Match path rq
+            match m with
+            | Some tuple -> 
+                let r = RestRequest<string>.New rq rs rq.RawUrl
+                Some (x.Fun r)
+            | None -> None
+
+
 

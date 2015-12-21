@@ -80,18 +80,12 @@
     type IHttpReply =
        abstract member Send : IHttpRequest -> IHttpResponse -> Async<unit>
 
-    type HttpHandler = IHttpRequest -> IHttpResponse -> IHttpReply
-
-    type RoutePattern = 
-        | Path      of string
-        | Regex     of string
-        | Format    of string
-
-    type HttpRoute = {
-        Verb: HttpVerb
-        Pattern: RoutePattern
-        Handler: HttpHandler
-    }
+    type RestRequest<'t> = 
+        { Request: IHttpRequest
+          Response: IHttpResponse
+          Arguments: 't }
+        static member New rq rs a =
+            { Request = rq; Arguments = a; Response = rs }
 
     type ILogger =
         abstract member Log : string -> unit
@@ -108,15 +102,7 @@
         abstract member EndGetContext : asyncResult:IAsyncResult -> IHttpListenerContext
         abstract member GetContext : unit -> IHttpListenerContext
         abstract member GetContextAsync : unit -> Threading.Tasks.Task<IHttpListenerContext>
-
-    type HttpServerConfig = {
-        Schema: HttpSchema
-        Port: int
-        BasePath: string option
-        Routes: HttpRoute list
-        Logger: ILogger option
-    }
-
+        
     let toVerb (s:string) = 
         match s.ToUpperInvariant() with
         | "GET"     -> Get
