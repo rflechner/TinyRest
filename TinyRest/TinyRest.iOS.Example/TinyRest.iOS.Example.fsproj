@@ -120,9 +120,9 @@
       <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\TinyRest.iOS\TinyRest.iOS.fsproj">
-      <Name>TinyRest.iOS</Name>
-      <Project>{0141b610-f129-438f-be5d-663aa433448f}</Project>
+    <ProjectReference Include="..\TinyRest.iOS.Core\TinyRest.iOS.Core.fsproj">
+      <Name>TinyRest.iOS.Core</Name>
+      <Project>{0eec2269-739a-43c7-a104-81f083695915}</Project>
       <Private>True</Private>
       <IsAppExtension>false</IsAppExtension>
       <IsWatchApp>false</IsWatchApp>
