@@ -1,4 +1,4 @@
-﻿<Properties StartupItem="TinyRest.iOS.Sample/TinyRest.iOS.Sample.fsproj">
+﻿<Properties StartupItem="TinyRest.Droid.Example/TinyRest.Droid.Example.fsproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="TinyRest-PCL/TinyRestPcl.fs">
     <Files>
