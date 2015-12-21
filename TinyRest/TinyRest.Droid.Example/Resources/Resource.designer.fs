@@ -23,10 +23,10 @@ namespace TinyRest.Droid.Example
     #nowarn "51" // address-of operator can occur in the code
     #nowarn "1183" // unused 'this' reference
     
-    exception ReturnException1d204eca40ad48b3be2b81aa367f7cc3 of obj
-    exception ReturnNoneException1d204eca40ad48b3be2b81aa367f7cc3
+    exception ReturnExceptiondb19e4334af5495399b4286ac49147f9 of obj
+    exception ReturnNoneExceptiondb19e4334af5495399b4286ac49147f9
     [<AutoOpen>]
-    module FuncConvertFinalOverload1d204eca40ad48b3be2b81aa367f7cc3 =
+    module FuncConvertFinalOverloaddb19e4334af5495399b4286ac49147f9 =
       // This extension member adds to the FuncConvert type and is the last resort member in the method overloading rules. 
       type global.Microsoft.FSharp.Core.FuncConvert with
           /// A utility function to convert function values from tupled to curried form
@@ -68,8 +68,11 @@ namespace TinyRest.Droid.Example
             // aapt resource value: 0x7f050000
             static member MyButton = 2131034112
             
+            // aapt resource value: 0x7f050002
+            static member editText1 = 2131034114
+            
             // aapt resource value: 0x7f050001
-            static member editText1 = 2131034113
+            static member loadButton = 2131034113
             (* Member of type 'CodeTypeConstructor' is not supported by the CodeDOM provider and was omitted *)
 
 

@@ -5,9 +5,15 @@
     android:layout_height="fill_parent">
     <Button
         android:id="@+id/MyButton"
-        android:layout_width="fill_parent"
+        android:layout_width="171.5dp"
         android:layout_height="wrap_content"
-        android:text="Start server" />
+        android:text="Start server"
+        android:layout_marginRight="0.0dp" />
+    <Button
+        android:text="load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loadButton" />
     <EditText
         android:inputType="textMultiLine"
         android:layout_width="match_parent"

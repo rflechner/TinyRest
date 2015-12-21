@@ -1,7 +1,10 @@
-module TinyRestServer
+module public TinyRestServer
 
     open System
     open System.Net
+
+    open Http
+    open Routing
     open TinyRestServerPCL
 
     type File = System.IO.File

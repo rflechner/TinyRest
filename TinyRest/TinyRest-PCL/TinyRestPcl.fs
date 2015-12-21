@@ -88,7 +88,7 @@
             while true do 
                 let! context = asynctask
                 Async.Start (handler context.Request context.Response conf)
-        } |> Async.Start 
+        } |> Async.Start
         listener
 
     let text s = new TextHttpReply(s) :> IHttpReply
@@ -161,37 +161,57 @@
                     close r None
                 }
 
-//    type RoutesBuilder () =
-//        let mutable routes:HttpRoute seq = Seq.empty
-//
-//        member x.OnGetPattern (p, a:Action<IHttpRequest, IHttpResponse>) =
-//            let r = GET (Regex(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//            routes <- routes |> Seq.append [r]
-//            x
-//
-//        member x.OnPostPattern (p, a:Action<IHttpRequest, IHttpResponse>) =
-//            let r = POST (Regex(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//            routes <- routes |> Seq.append [r]
-//            x
-//
-//        member x.OnGetPath (p, a:Action<IHttpRequest, IHttpResponse>) =
-//            let r = GET (Path(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//            routes <- routes |> Seq.append [r]
-//            x
-//
-//        member x.OnPostPath (p, a:Action<IHttpRequest, IHttpResponse>) =
-//            let r = POST (Path(p)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//            routes <- routes |> Seq.append [r]
-//            x
-//
-//        member x.AddPath (verb, path, a:Action<IHttpRequest, IHttpResponse>) =
-//            let r = match verb with
-//                    | HttpVerb.Get -> GET (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//                    | HttpVerb.Post -> POST (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//                    | HttpVerb.Put -> PUT (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//                    | HttpVerb.Delete -> DELETE (Path(path)) <| fun q r -> new FluentHttpReply(a) :> IHttpReply
-//            routes <- routes |> Seq.append [r]
-//            x
-//
+    type RoutesBuilder () =
+        let mutable routes:HttpRoute list = List.empty
+
+        let add r = routes <- r :: routes
+        let toHttpReply (o:obj) = 
+            match o with
+            | null               -> text ""
+            | :? IHttpReply as r -> r
+            | :? string as r     -> text r
+            | _                  -> text (o.ToString())
+
+        member x.OnGetPattern (p, a:Action<IHttpRequest, IHttpResponse>) =
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Get r |> add
+            x
+
+        member x.OnPutPattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Put r |> add
+            x
+
+        member x.OnDeletePattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Delete r |> add
+            x
+
+        member x.OnPostPattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Post r |> add
+            x
+
+        member x.OnGetPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Get r |> add
+            x
+
+        member x.OnPostPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Post r |> add
+            x
+
+        member x.OnPutPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Put r |> add
+            x
+
+        member x.OnDeletePath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Delete r |> add
+            x
+
+
 
 

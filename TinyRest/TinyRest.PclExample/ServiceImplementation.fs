@@ -1,11 +1,13 @@
 ﻿module public ServiceImplementation
 
 open TinyRestServerPCL
+open Routing
+open Http
 
-let routes = [
-                GET (Path("/")) <| fun q r -> text "coucou"
-                get "/bye" <| fun q r -> text "bye bye\n@++"
-                getPattern "/haha/(.*)" <| fun q r -> text "ha ha"
+let routes = GET [
+                path "/" <| fun _ -> text "coucou"
+                path "/bye" <| fun _ -> text "bye bye\n@++"
+                regex "/haha/(.*)" <| fun _ -> text "ha ha"
              ]
 
 let startServer (listener:IHttpListener) (logger:ILogger) =

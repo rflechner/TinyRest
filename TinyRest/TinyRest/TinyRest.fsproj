@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TinyRestServer.fs" />
-    <None Include="TinyRestServer-sample.fsx" />
     <Compile Include="TinyRestServerCSharp.fs" />
     <None Include="packages.config" />
     <None Include="Script1.fsx" />

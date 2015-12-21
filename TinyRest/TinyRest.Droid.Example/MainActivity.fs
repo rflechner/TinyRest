@@ -13,8 +13,11 @@ open System.Net.NetworkInformation
 open System.Threading.Tasks
 open System.Diagnostics
 
+open Http
+open Routing
 open TinyRestServerPCL
 open TinyRestServer
+
 
 type UiLogger(edit:EditText) =
     interface ILogger with
@@ -34,6 +37,7 @@ type MainActivity () =
         this.SetContentView (Resource_Layout.Main)
 
         let button = this.FindViewById<Button>(Resource_Id.MyButton)
+        let loadButton = this.FindViewById<Button>(Resource_Id.loadButton)
         let editText1 = this.FindViewById<EditText>(Resource_Id.editText1)
 
         button.Click.Add (fun args -> 
@@ -47,7 +51,7 @@ type MainActivity () =
             async {
                 for a in Java.Net.Inet4Address.GetAllByName("localhost") do
                     editText1.Post(new Action(fun () -> editText1.Text <- "\n" + a.HostAddress)) |> ignore
-                 
+                
                 ServiceImplementation.startServer listener logger
 
                 let client = new WebClient()
@@ -58,5 +62,13 @@ type MainActivity () =
             
         )
 
-        
+        loadButton.Click.Add (fun _ ->
+            async {
+                try
+                    let client = new WebClient()
+                    let content = client.DownloadString(new Uri("http://localhost:8009/TinyRest1/bye"))
+                    Debug.WriteLine(content)
+                with e -> Debug.WriteLine(e.Message)
+            } |> Async.StartImmediate
+        )
 

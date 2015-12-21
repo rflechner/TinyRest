@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
+		<HintPath>..\packages\FSharp.Core.4.0.0.1\lib\portable-net45+monoandroid10+monotouch10+xamarinios10\FSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />

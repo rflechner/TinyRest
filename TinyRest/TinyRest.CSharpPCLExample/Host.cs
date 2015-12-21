@@ -10,7 +10,7 @@ namespace TinyRest.CSharpPCLExample
     {
         int count = 0;
 
-        public void Run(TinyRestServerPCL.IHttpListener listener, TinyRestServerPCL.ILogger logger)
+        public void Run(Http.IHttpListener listener, Http.ILogger logger)
         {
 
             /*
@@ -30,9 +30,9 @@ namespace TinyRest.CSharpPCLExample
 
             listener.AddPrefix("http://+:8001");
 
-            var routes = new List<TinyRestServerPCL.HttpRoute>();
+            var routes = new List<Routing.HttpRoute>();
             
-            new TinyRestServerPCL.RoutesBuilder()
+            new RoutesBuilder()
                 .OnGetPath("/", (request, response) =>
                     {
                         var writer = new System.IO.StreamWriter(response.OutputStream);
