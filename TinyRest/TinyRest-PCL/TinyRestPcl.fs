@@ -50,20 +50,6 @@
                     close r logger
                 }
 
-//    let compiledRoutes = new System.Collections.Generic.Dictionary<string, Regex>()
-//
-//
-//    let routeMatch (pattern:RoutePattern) (path:string) =
-//        match pattern with
-//        | Path p    -> path = (p |> ensureStartsWith "/")
-//        | Regex p   -> 
-//            if compiledRoutes.ContainsKey p |> not then
-//                compiledRoutes.Add (p, new Regex (p))
-//            let regex = compiledRoutes.[p]
-//            regex.IsMatch path
-//        //| Format f  ->
-//            
-
     let handler :(IHttpRequest -> IHttpResponse -> HttpServerConfig -> Async<unit>) = 
         fun req resp conf -> 
             async {
@@ -75,7 +61,6 @@
                     log (conf.Logger) (sprintf "path: %s" path)
 
                     let verb = req.HttpMethod |> toVerb
-                    //let route = conf.Routes |> Seq.tryFind (fun r -> r.Verb = verb && routeMatch r.Pattern path)
                     let route = conf.Routes 
                                 |> Seq.filter (fun r -> r.Verb = verb)
                                 |> Seq.choose (fun r -> r.Handler.TryHandle path req resp)
@@ -131,9 +116,6 @@
     let sendModel<'t, 's when 's :> IOjectModelSerializer> (m:'t) contentType (s:unit -> 's) = 
         ObjectModelHttpReply(m, s(), contentType) :> IHttpReply
 
-//    let sendModel<'t> (m:'t) contentType (s:unit -> #IOjectModelSerializer) = 
-//        ObjectModelHttpReply(m, s(), contentType) :> IHttpReply
-    
     let json m =
         sendModel m "application/json" <| fun _ -> JsonModelSerializer() :> IOjectModelSerializer
 
@@ -178,7 +160,7 @@
                     f.Invoke(q,r)
                     close r None
                 }
-//
+
 //    type RoutesBuilder () =
 //        let mutable routes:HttpRoute seq = Seq.empty
 //

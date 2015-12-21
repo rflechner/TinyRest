@@ -87,7 +87,7 @@ let main argv =
         GET [
             path "/" <| fun p -> text "coucou"
             regex "/[1-9]{2}_toto" <| fun p -> text "regex works !"
-            format "/user:%d/%s" <| fun r -> text "format works !"
+            format "/user:%d" <| fun r -> text "format works !"
         ]
 
     let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; Logger=Some(logger :> ILogger); }
