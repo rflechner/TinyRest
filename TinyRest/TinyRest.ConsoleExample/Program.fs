@@ -29,7 +29,8 @@ let container (name:string) (attrs:XAttribute list) (children:XElement list) =
 
 let attr name text = new XAttribute(XName.Get(name), text)
 
-let listFiles (q:IHttpRequest) (r:IHttpResponse) =
+let listFiles (r:RestRequest<string>) =
+    let q = r.Request
     let usr = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
     let homeDir = combine usr "Downloads"
     let p = match q.QueryString |> getVal "p" with
@@ -68,32 +69,44 @@ let listFiles (q:IHttpRequest) (r:IHttpResponse) =
     let h = container "html" [] [ container "body" [] body ]
     h.ToString() |> html
 
-let download (q:IHttpRequest) (r:IHttpResponse) =
+let download (r:RestRequest<string>) =
+    let q = r.Request
     let usr = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
     let homeDir = combine usr "Downloads"
     let p = match q.QueryString |> getVal "p" with
              | Some v -> combine homeDir (v |> skipStart "\\" |> skipStart "/")
              | None   -> homeDir
     if File.Exists p then
-        r.AddHeader("Content-Disposition", "Attachment;filename=" + Path.GetFileName(p))
+        r.Response.AddHeader("Content-Disposition", "Attachment;filename=" + Path.GetFileName(p))
         new StaticFileReply(p,logger) :> IHttpReply
     else
         new ErrorHttpReply("Cannot find file", logger) :> IHttpReply
 
 
 [<EntryPoint>]
-let main argv = 
+let main _ = 
     let routes = 
         GET [
-            path "/" <| fun p -> text "coucou"
-            regex "/[1-9]{2}_toto" <| fun p -> text "regex works !"
-            format "/user:%d" <| fun r -> text "format works !"
+            path "/" <| fun _ -> text "coucou"
+            regex "/[1-9]{2}_toto" <| fun _ -> text "regex works !"
+            path "/ip" <| fun r -> text r.Request.RemoteEndPoint.IpAddress
+            path "/bye" <| fun _ -> text "bye bye\n@++"
+            regex "/haha/(.*)" <| fun _ -> text "ha ha"
+            path "/files" <| listFiles
+            path "/download" <| download
+            path "/user" <| fun _ -> json {Login="Romain"; Email="rflechner@romcyber.com"; Birth=DateTime(1985, 02, 11)}
+            format "/user:%d" <| fun r -> text <| sprintf "format works ! url: %s id is %d" r.Request.RawUrl r.Arguments
+            format "/user:%s" <| fun r -> json {Login=r.Arguments; Email="rflechner@romcyber.com"; Birth=DateTime(1985, 02, 11)}
+        ] @
+        POST [
+            path "/" <| fun p -> text "coucou posted !"
         ]
 
     let conf = { Schema=Http; Port=8009; BasePath=Some "/TinyRest1"; Routes=routes; Logger=Some(logger :> ILogger); }
     let listener = new Listener()
-    listener |> listen conf
+    listener |> listen conf |> ignore
 
-    Console.Read () |> ignore
+    printfn "Press any key to kill the server ..."
+    Console.ReadKey true |> ignore
     0
 

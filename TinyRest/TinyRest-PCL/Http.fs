@@ -2,9 +2,7 @@
 
     open System
     open System.Text
-    open System.Text.RegularExpressions
     open System.Net
-    open System.IO
 
     type HttpSchema = 
         | Http

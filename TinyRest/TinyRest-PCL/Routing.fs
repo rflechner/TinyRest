@@ -236,7 +236,7 @@ let buildPrefix (c:HttpServerConfig) =
 
     match c.BasePath with
     | None            -> ()
-    | SkipStart "/" p //-> p |> ensureEndsWith "/" |> b.Append |> ignore
+    | SkipStart "/" p
     | Some p          -> p |> ensureEndsWith "/" |> b.Append |> ignore
 
     b.ToString()
