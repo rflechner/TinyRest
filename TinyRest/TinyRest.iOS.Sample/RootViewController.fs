@@ -1,4 +1,4 @@
-﻿namespace TinyRest.iOS.Example
+﻿namespace TinyRest.iOS.Sample
 
 open System
 open System.Drawing
@@ -10,6 +10,8 @@ open CoreGraphics
 
 open TinyRestServerPCL
 open TinyRestServer
+open Http
+open Routing
 open System.Net
 
 type UiLogger(edit:UITextView) =
@@ -46,7 +48,7 @@ type RootViewController () =
 
         this.View.BackgroundColor <- UIColor.White
 
-        let button = new UIButton(new CGRect(new CGPoint(0., 50.), new CGSize(this.View.Frame.Width, nfloat 40.)))
+        let button = new UIButton(new CGRect(new CGPoint(0., 50.), new CGSize(UIScreen.MainScreen.ApplicationFrame.Width, nfloat 40.)))
         button.SetTitle("Start server", UIControlState.Normal)
         button.BackgroundColor <- UIColor.LightGray
         button.TintColor <- UIColor.Black

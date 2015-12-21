@@ -1,4 +1,4 @@
-namespace TinyRest.iOS.Example
+﻿namespace TinyRest.iOS.Sample
 
 open System
 open UIKit
@@ -16,10 +16,3 @@ type AppDelegate () =
         window.RootViewController <- new RootViewController ()
         window.MakeKeyAndVisible ()
         true
-
-module Main =
-    [<EntryPoint>]
-    let main args =
-        UIApplication.Main (args, null, "AppDelegate")
-        0
-

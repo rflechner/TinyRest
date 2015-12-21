@@ -61,12 +61,13 @@
     <Compile Include="Properties\AssemblyInfo.fs" />
     <Content Include="Properties\AndroidManifest.xml" />
     <Compile Include="MainActivity.fs" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core">
-      <Private>True</Private>
+      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\portable-net45+monoandroid10+monotouch10+xamarinios10\FSharp.Core.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -83,8 +84,7 @@
     </ProjectReference>
     <ProjectReference Include="..\TinyRest.PclExample\TinyRest.PclExample.fsproj">
       <Name>TinyRest.PclExample</Name>
-      <Project>{01305b61-a0ee-462a-af7c-041a0d014e7c}</Project>
-      <Private>True</Private>
+      <Project>{01305B61-A0EE-462A-AF7C-041A0D014E7C}</Project>
     </ProjectReference>
   </ItemGroup>
 </Project>

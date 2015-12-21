@@ -1,15 +1,15 @@
-﻿module TinyRest.iOS.AssemblyInfo
+namespace TinyRest.iOS.Core
 open System.Reflection
 open System.Runtime.CompilerServices
 
-[<assembly: AssemblyTitle("TinyRest.iOS")>]
+[<assembly: AssemblyTitle("TinyRest.iOS.Core")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("TinyRest.iOS")>]
-[<assembly: AssemblyCopyright("Copyright ©  2015")>]
+[<assembly: AssemblyProduct("TinyRest.iOS.Core")>]
+[<assembly: AssemblyCopyright("Copyright �  2015")>]
 [<assembly: AssemblyTrademark("")>]
-[<assembly: AssemblyCulture("")>]
+
 // The assembly version has the format {Major}.{Minor}.{Build}.{Revision}
 
 [<assembly: AssemblyVersion("1.0.0.0")>]
@@ -18,4 +18,3 @@ open System.Runtime.CompilerServices
 //[<assembly: AssemblyKeyFile("")>]
 
 ()
-

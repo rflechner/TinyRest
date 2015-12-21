@@ -1,10 +1,13 @@
 ﻿namespace TinyRestServerCSharp
 
-    open TinyRestServerPCL
-    open TinyRestServer
     open System.Collections.Generic
     open System.Net
     open System.Runtime.CompilerServices
+
+    open Http
+    open Routing
+    open TinyRestServerPCL
+    open TinyRestServer
 
     type HttpRestServer (schema, port, basePath, routes, logger) =
         member x.Listen () =
@@ -44,43 +47,43 @@
             x
 
         member x.OnGetPattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = GET (Regex(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Get r |> routes.Add
             x
 
         member x.OnPutPattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = PUT (Regex(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Put r |> routes.Add
             x
 
         member x.OnDeletePattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = DELETE (Regex(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Delete r |> routes.Add
             x
 
         member x.OnPostPattern (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = POST (Regex(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = regex p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Post r |> routes.Add
             x
 
         member x.OnGetPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = GET (Path(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Get r |> routes.Add
             x
 
         member x.OnPostPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = POST (Path(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Post r |> routes.Add
             x
 
         member x.OnPutPath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = PUT (Path(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Put r |> routes.Add
             x
 
         member x.OnDeletePath (p, a:System.Func<IHttpRequest, IHttpResponse, obj>) =
-            let r = DELETE (Path(p)) <| fun q r -> a.Invoke(q,r) |> toHttpReply
-            routes.Add r
+            let r = path p <| fun r -> a.Invoke(r.Request, r.Response) |> toHttpReply
+            HttpRoute.From HttpVerb.Delete r |> routes.Add
             x
 
         member x.Create () =
