@@ -134,7 +134,7 @@ Target "CreateIosPackage" (fun _ ->
             {p with
                 Authors = ["rflechner"]
                 Project = "TinyRest-IOS"
-                Title = "TinyRest.Android"
+                Title = "TinyRest.IOS"
                 Description = "A tiny FSharp and CSharp Rest server"
                 OutputPath = packagingRoot
                 Summary = "A tiny FSharp and CSharp Rest server"
@@ -144,8 +144,8 @@ Target "CreateIosPackage" (fun _ ->
                 AccessKey = keyFile
                 Publish = publishNuget
                 Files = [ 
-                            ("*.*", Some @"lib\Xamarin.iOS10", None)
-                            ("*.*", Some @"lib\MonoTouch", None)
+                            ("*.*", Some @"lib\XamariniOS10", None)
+                            ("*.*", Some @"lib\MonoTouch10", None)
                         ]
                 Dependencies = [
                                     "TinyRest-PCL", buildVersion
@@ -178,7 +178,6 @@ Target "BuildIos" (fun _ ->
     !! "**/TinyRest.iOS.fsproj" |> MSBuildRelease buildIosDir "Build" |> Log "BuildLib-Output: "
 )
 
-
 "Clean"
     ==> "BuildPCL"
     ==> "CreatePclPackage"
@@ -188,6 +187,5 @@ Target "BuildIos" (fun _ ->
     ==> "CreateDroidPackage"
     ==> "BuildIos"
     ==> "CreateIosPackage"
-
 
 RunTargetOrDefault "CreateIosPackage"

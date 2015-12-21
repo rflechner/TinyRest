@@ -126,7 +126,7 @@ type IRouteHandler =
     abstract member TryHandle<'t> : string -> IHttpRequest -> IHttpResponse -> IHttpReply option
     abstract member Match : string -> IHttpRequest -> obj option
 
-type HttpHandler = IHttpRequest -> IHttpResponse -> IHttpReply
+//type HttpHandler = IHttpRequest -> IHttpResponse -> IHttpReply
 
 type HttpRoute = 
     { Verb: HttpVerb
@@ -143,7 +143,7 @@ type HttpServerConfig =
 
 type RouteFormatHandler<'t> = 
     { Format : RouteFormat
-      Fun : RestRequest<'t> -> IHttpReply }
+      Fun : IHttpRequest -> IHttpResponse -> 't -> IHttpReply }
     static member New f h =
         { Format = f; Fun = h }
     interface IRouteHandler with
@@ -201,9 +201,7 @@ type RouteFormatHandler<'t> =
         member x.TryHandle path rq rs = 
             let m = (x :> IRouteHandler).Match path rq
             match m with
-            | Some tuple -> 
-                let r = RestRequest<'t>.New rq rs (tuple :?> 't)
-                Some (x.Fun r)
+            | Some tuple -> Some (x.Fun rq rs (tuple :?> 't))
             | None -> None
 
 let skipStart (start:string) (str:string) =

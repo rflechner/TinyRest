@@ -48,7 +48,7 @@ type RootViewController () =
 
         this.View.BackgroundColor <- UIColor.White
 
-        let button = new UIButton(new CGRect(new CGPoint(50., 50.), new CGSize(UIScreen.MainScreen.ApplicationFrame.Width, nfloat 40.)))
+        let button = new UIButton(new CGRect(new CGPoint(0., 50.), new CGSize(UIScreen.MainScreen.ApplicationFrame.Width, nfloat 40.)))
         button.SetTitle("Start server", UIControlState.Normal)
         button.BackgroundColor <- UIColor.LightGray
         button.TintColor <- UIColor.Black

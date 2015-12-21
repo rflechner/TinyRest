@@ -1,6 +1,13 @@
 ﻿<Properties StartupItem="TinyRest.iOS.Sample/TinyRest.iOS.Sample.fsproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6s.9.2" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="TinyRest-PCL/TinyRestPcl.fs">
+    <Files>
+      <File FileName="TinyRest.ConsoleExample/Program.fs" Line="105" Column="15" />
+      <File FileName="TinyRest/TinyRestServer.fs" Line="59" Column="13" />
+      <File FileName="TinyRest-PCL/Routing.fs" Line="149" Column="33" />
+      <File FileName="TinyRest-PCL/TinyRestPcl.fs" Line="132" Column="9" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

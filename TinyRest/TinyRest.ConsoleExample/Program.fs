@@ -82,6 +82,13 @@ let download (r:RestRequest<string>) =
     else
         new ErrorHttpReply("Cannot find file", logger) :> IHttpReply
 
+type Car = 
+    { Name:string
+      Factory:string
+      Color:string }
+
+let reply<'t> (model:'t) =
+    ()
 
 [<EntryPoint>]
 let main _ = 
@@ -95,8 +102,12 @@ let main _ =
             path "/files" <| listFiles
             path "/download" <| download
             path "/user" <| fun _ -> json {Login="Romain"; Email="rflechner@romcyber.com"; Birth=DateTime(1985, 02, 11)}
-            format "/user:%d" <| fun r -> text <| sprintf "format works ! url: %s id is %d" r.Request.RawUrl r.Arguments
-            format "/user:%s" <| fun r -> json {Login=r.Arguments; Email="rflechner@romcyber.com"; Birth=DateTime(1985, 02, 11)}
+            format "/user:%d" <| fun rq rs args -> text <| sprintf "format works ! url: %A id is %d" rq.RawUrl args
+            format "/user:%s" <| fun rq rs args -> json {Login=args; Email="rflechner@romcyber.com"; Birth=DateTime(1985, 02, 11)}
+            format "/car:%d_%s" 
+                <| fun rq rs (a1,a2) ->
+                    rs.ContentEncoding <- Encoding.UTF8
+                    json { Name=(sprintf "Peugeot %d féline" a1); Factory="Peugeot"; Color=a2 }
         ] @
         POST [
             path "/" <| fun p -> text "coucou posted !"

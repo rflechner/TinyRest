@@ -126,7 +126,7 @@
         let r = new Regex(p, RegexOptions.IgnorePatternWhitespace ||| RegexOptions.IgnoreCase)
         RouteRegexHandler.New r h  :> IRouteHandler
 
-    let format (pf : PrintfFormat<_,_,_,_,'t>) (h : RestRequest<'t> -> IHttpReply) =
+    let format (pf : PrintfFormat<_,_,_,_,'t>) (h : IHttpRequest -> IHttpResponse -> 't -> IHttpReply) =
         let f = pf.Value |> FormatParser.Create |> fun p -> p.Parse(typeof<'t>)
         RouteFormatHandler<'t>.New f h  :> IRouteHandler
 

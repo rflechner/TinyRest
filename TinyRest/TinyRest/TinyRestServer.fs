@@ -49,7 +49,7 @@
             member x.RawUrl = r.RawUrl
             member x.RemoteEndPoint = new IPEndPoint(IpAddress=r.RemoteEndPoint.Address.ToString(), Port=r.RemoteEndPoint.Port)
             member x.RequestTraceIdentifier = r.RequestTraceIdentifier
-            member x.TransportContext = r.TransportContext
+           // member x.TransportContext = r.TransportContext
             member x.Url = r.Url
             member x.UrlReferrer = r.UrlReferrer
             member x.UserAgent = r.UserAgent
