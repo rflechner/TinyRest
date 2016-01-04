@@ -9,5 +9,6 @@ packaging/
 packagingRoot/
 packages/
 *.suo
-.fake/*
+*.fake/*
 *.suo
+TinyRest/.fake/build.fsx_B72FFDE0_config.xml
