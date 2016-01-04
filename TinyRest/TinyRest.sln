@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyRest.CSharpExample", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A1CFF92-2DFB-4F15-A0E7-3E2E087BDA5A}"
 	ProjectSection(SolutionItems) = preProject
-		build.bat = build.bat
-		build.fsx = build.fsx
-		TinyRest.nuspec = TinyRest.nuspec
+		..\build.bat = ..\build.bat
+		..\build.fsx = ..\build.fsx
+		..\TinyRest.nuspec = ..\TinyRest.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F050DD80-3B8F-4AEE-BE3F-72A927CCEC7E}"

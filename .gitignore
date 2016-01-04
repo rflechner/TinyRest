@@ -8,4 +8,6 @@ buildPcl/
 packaging/
 packagingRoot/
 packages/
-*.v12.suo
+*.suo
+.fake/*
+*.suo

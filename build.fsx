@@ -1,4 +1,4 @@
-﻿#r "packages/FAKE.3.35.4/tools/FakeLib.dll"
+﻿#r "TinyRest/packages/FAKE/tools/FakeLib.dll"
 
 open Fake
 
@@ -188,4 +188,7 @@ Target "BuildIos" (fun _ ->
     ==> "BuildIos"
     ==> "CreateIosPackage"
 
+//RunTargetOrDefault "CreateIosPackage"
 RunTargetOrDefault "CreateIosPackage"
+
+
