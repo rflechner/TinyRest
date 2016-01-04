@@ -15,7 +15,7 @@
     <AndroidApplication>False</AndroidApplication>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>TinyRest.Droid</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.1</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
     <TargetFrameworkProfile />
@@ -79,9 +79,12 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
       <Name>TinyRest-PCL</Name>
-      <Project>{934B5323-D59F-49BC-AC5C-ECAA5CE10803}</Project>
+      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
 </Project>

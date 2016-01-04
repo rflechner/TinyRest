@@ -212,6 +212,6 @@
             HttpRoute.From HttpVerb.Delete r |> add
             x
 
-
-
+    type IAppBootstrapper =
+        abstract member Routes : unit -> System.Collections.Generic.IEnumerable<HttpRoute>
 

@@ -76,7 +76,8 @@
   <ItemGroup>
     <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
       <Name>TinyRest-PCL</Name>
-      <Project>{934B5323-D59F-49BC-AC5C-ECAA5CE10803}</Project>
+      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\TinyRest.Droid\TinyRest.Droid.fsproj">
       <Name>TinyRest.Droid</Name>

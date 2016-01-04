@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TinyRest.iOS.Sample</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>TinyRestiOSSample</AssemblyName>
+    <AssemblyName>TinyRest.iOS.Sample</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>

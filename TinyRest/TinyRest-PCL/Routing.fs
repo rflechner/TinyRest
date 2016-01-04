@@ -126,8 +126,6 @@ type IRouteHandler =
     abstract member TryHandle<'t> : string -> IHttpRequest -> IHttpResponse -> IHttpReply option
     abstract member Match : string -> IHttpRequest -> obj option
 
-//type HttpHandler = IHttpRequest -> IHttpResponse -> IHttpReply
-
 type HttpRoute = 
     { Verb: HttpVerb
       Handler: IRouteHandler }
