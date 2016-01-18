@@ -25,6 +25,7 @@
             member x.Send q r =
                 async {
                     let out = Text.Encoding.UTF8.GetBytes txt
+                    r.ContentLength64 <- int64 out.Length
                     r.OutputStream.Write(out,0,out.Length)
                     close r logger
                 }
@@ -35,6 +36,7 @@
                 async {
                     r.ContentType <- "text/html"
                     let out = Text.Encoding.UTF8.GetBytes txt
+                    r.ContentLength64 <- int64 out.Length
                     r.OutputStream.Write(out,0,out.Length)
                     close r logger
                 }
@@ -46,6 +48,7 @@
                     log logger (sprintf "Http error: %s" txt)
                     r.StatusCode <- 500
                     let out = Text.Encoding.UTF8.GetBytes txt
+                    r.ContentLength64 <- int64 out.Length
                     r.OutputStream.Write(out,0,out.Length)
                     close r logger
                 }
@@ -67,15 +70,21 @@
                                 |> Seq.tryHead
                     match route with
                     | None   -> 
-                        log (conf.Logger) (sprintf "Invalid route: %s" path)
-                        let out = Text.Encoding.UTF8.GetBytes ("Invalid route: " + path)
+                        resp.StatusCode <- 404
+                        let message = sprintf "Invalid route: %s" path
+                        resp.StatusDescription <- "Route not found"
+                        log (conf.Logger) message
+                        let out = Text.Encoding.UTF8.GetBytes message
                         resp.OutputStream.Write(out,0,out.Length)
                         resp.OutputStream.Flush()
                         resp.OutputStream.Dispose()
                     | Some reply -> 
                         reply.Send req resp |> Async.StartImmediate
-                with e -> log (conf.Logger) (sprintf "Error: %s" e.Message)
-                          close resp (conf.Logger)
+                with e -> 
+                    resp.StatusCode <- 500
+                    resp.StatusDescription <- "Internal error"
+                    log (conf.Logger) (sprintf "Error: %s" e.Message)
+                    close resp (conf.Logger)
             }
 
     let listen (conf:HttpServerConfig) (listener:IHttpListener) = 
