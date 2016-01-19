@@ -18,6 +18,8 @@ type Bootstrapper () =
         member x.Routes() =
             GET [
                 path "/" <| fun _ -> text "coucou"
+                path "/j" <| fun _ -> 
+                    json [for i in 0 .. 100 -> { Name=(sprintf "Peugeot %d féline" i); Factory="Peugeot"; Color="color" }]
                 path "/bye" <| fun _ -> text "bye bye\n@++"
                 regex "/haha/(.*)" <| fun _ -> text "ha ha"
                 format "/car:%d_%s" 

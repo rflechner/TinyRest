@@ -1,6 +1,7 @@
 obj/
 bin/
 build/
+buildIIS/
 buildIos/
 buildDroid/
 buildLib/
@@ -11,4 +12,6 @@ packages/
 *.suo
 *.fake/*
 *.suo
-TinyRest/.fake/build.fsx_B72FFDE0_config.xml
+*.vs/*
+TinyRest/.fake/*
+TinyRest/.vs/TinyRest/v14/.suo
