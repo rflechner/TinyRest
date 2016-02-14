@@ -46,13 +46,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
-      <Project>{934B5323-D59F-49BC-AC5C-ECAA5CE10803}</Project>
-      <Name>TinyRest-PCL</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
+      <Project>{18431B00-4D93-4180-8D95-6342D24B0F82}</Project>
+      <Name>TinyRest.Pcl259</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

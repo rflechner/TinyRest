@@ -36,7 +36,7 @@
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">12</MinimumVisualStudioVersion>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.Portable.FSharp.Targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.Portable.FSharp.Targets" />
   <ItemGroup>
     <Compile Include="ServiceImplementation.fs" />
     <Content Include="packages.config" />
@@ -47,17 +47,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
-      <Name>TinyRest-PCL</Name>
-      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
+    <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
+      <Name>TinyRest.Pcl259</Name>
+      <Project>{18431b00-4d93-4180-8d95-6342d24b0f82}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

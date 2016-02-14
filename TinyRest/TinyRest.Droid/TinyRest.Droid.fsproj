@@ -15,7 +15,7 @@
     <AndroidApplication>False</AndroidApplication>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>TinyRest.Droid</AssemblyName>
-    <TargetFrameworkVersion>v5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
     <TargetFrameworkProfile />
@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
-      <Private>True</Private>
+      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\portable-net45+monoandroid10+monotouch10+xamarinios10\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Mono.Android" />
@@ -81,9 +81,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
-      <Name>TinyRest-PCL</Name>
-      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
+    <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
+      <Name>TinyRest.Pcl259</Name>
+      <Project>{18431b00-4d93-4180-8d95-6342d24b0f82}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

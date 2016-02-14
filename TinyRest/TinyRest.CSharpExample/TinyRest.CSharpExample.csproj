@@ -56,9 +56,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
-      <Project>{934B5323-D59F-49BC-AC5C-ECAA5CE10803}</Project>
-      <Name>TinyRest-PCL</Name>
+    <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
+      <Project>{18431B00-4D93-4180-8D95-6342D24B0F82}</Project>
+      <Name>TinyRest.Pcl259</Name>
     </ProjectReference>
     <ProjectReference Include="..\TinyRest\TinyRest.fsproj">
       <Project>{4968FE42-5346-419F-AD92-8B0AD866A10D}</Project>

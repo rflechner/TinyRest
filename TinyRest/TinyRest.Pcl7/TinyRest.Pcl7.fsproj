@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18431B00-4D93-4180-8D95-6342D24B0F82}</ProjectGuid>
+    <ProjectGuid>{85236BFA-52D9-4FC5-9B63-4092E1007BA5}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TinyRest.Pcl259</RootNamespace>
-    <AssemblyName>TinyRest.Pcl259</AssemblyName>
+    <RootNamespace>TinyRest.Pcl7</RootNamespace>
+    <AssemblyName>TinyRest.Pcl7</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetProfile>netcore</TargetProfile>
-    <TargetFSharpCoreVersion>3.259.4.0</TargetFSharpCoreVersion>
+    <TargetFSharpCoreVersion>3.7.4.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>TinyRest.Pcl259</Name>
+    <Name>TinyRest.Pcl7</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\TinyRest.Pcl259.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\TinyRest.Pcl7.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\TinyRest.Pcl259.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\TinyRest.Pcl7.XML</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
@@ -40,20 +40,14 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.Portable.FSharp.Targets" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="..\TinyRest-PCL\Http.fs">
-      <Link>Http.fs</Link>
-    </Compile>
-    <Compile Include="..\TinyRest-PCL\Routing.fs">
-      <Link>Routing.fs</Link>
-    </Compile>
-    <Compile Include="..\TinyRest-PCL\TinyRestPcl.fs">
-      <Link>TinyRestPcl.fs</Link>
-    </Compile>
+    <Compile Include="Http.fs" />
+    <Compile Include="Routing.fs" />
+    <Compile Include="TinyRestPcl.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\portable-net45+netcore45+wpa81+wp8\FSharp.Core.dll</HintPath>
+      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\portable-net45+netcore45\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>

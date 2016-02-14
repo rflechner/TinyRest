@@ -1,15 +1,8 @@
-﻿<Properties StartupItem="TinyRest.Droid.Example/TinyRest.Droid.Example.fsproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TinyRest-PCL/TinyRestPcl.fs">
-    <Files>
-      <File FileName="TinyRest.ConsoleExample/Program.fs" Line="105" Column="15" />
-      <File FileName="TinyRest/TinyRestServer.fs" Line="59" Column="13" />
-      <File FileName="TinyRest-PCL/Routing.fs" Line="149" Column="33" />
-      <File FileName="TinyRest-PCL/TinyRestPcl.fs" Line="132" Column="9" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+﻿<Properties StartupItem="TinyRest.Droid.Example\TinyRest.Droid.Example.fsproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.AVD_GalaxyNexus_ToolsForApacheCordova" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench />
 </Properties>

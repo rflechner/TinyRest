@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TinyRest;
+using static TinyRestServerPCL;
 
 namespace TinyRest.CSharpPCLExample
 {
@@ -35,8 +37,7 @@ namespace TinyRest.CSharpPCLExample
             new RoutesBuilder()
                 .OnGetPath("/", (request, response) =>
                     {
-                        var writer = new System.IO.StreamWriter(response.OutputStream);
-                        writer.WriteLine("coucou");
+                        return "coucou";
                     }
                 );
             

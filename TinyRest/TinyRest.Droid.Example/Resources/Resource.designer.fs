@@ -23,10 +23,10 @@ namespace TinyRest.Droid.Example
     #nowarn "51" // address-of operator can occur in the code
     #nowarn "1183" // unused 'this' reference
     
-    exception ReturnExceptionb892c8d4df8a44d0a251f8bb9c4835ff of obj
-    exception ReturnNoneExceptionb892c8d4df8a44d0a251f8bb9c4835ff
+    exception ReturnException0354f296a24649c3a015b22a3e49acd8 of obj
+    exception ReturnNoneException0354f296a24649c3a015b22a3e49acd8
     [<AutoOpen>]
-    module FuncConvertFinalOverloadb892c8d4df8a44d0a251f8bb9c4835ff =
+    module FuncConvertFinalOverload0354f296a24649c3a015b22a3e49acd8 =
       // This extension member adds to the FuncConvert type and is the last resort member in the method overloading rules. 
       type global.Microsoft.FSharp.Core.FuncConvert with
           /// A utility function to convert function values from tupled to curried form

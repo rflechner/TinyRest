@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,10 +53,9 @@
     <None Include="Script1.fsx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
-      <Name>TinyRest-PCL</Name>
-      <Project>{934b5323-d59f-49bc-ac5c-ecaa5ce10803}</Project>
-      <Private>True</Private>
+    <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
+      <Name>TinyRest.Pcl259</Name>
+      <Project>{18431B00-4D93-4180-8D95-6342D24B0F82}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
