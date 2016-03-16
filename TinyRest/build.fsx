@@ -4,12 +4,9 @@ open Fake
 open System
 open System.Text
 open NuGetVersion
-
-getLastNuGetVersion (NuGetVersionArg.Default().Server) "FAKE"
-nextVersion (fun arg -> { arg with PackageName="FAKE"; Increment=IncPatch })
-nextVersion (fun arg -> { arg with PackageName="FAKE"; Increment=IncMinor })
-nextVersion (fun arg -> { arg with PackageName="FAKE"; Increment=IncMajor })
-
+open ProcessHelper
+open XamarinHelper
+open EnvironmentHelper
 
 let buildPclDir = "./buildPcl/"
 let buildLibDir = "./buildLib/"
@@ -218,7 +215,7 @@ Target "BuildDroid" (fun _ ->
 Target "BuildIos" (fun _ ->
     trace "Building default target"
     RestorePackages()
-    !! "**/TinyRest.iOS.fsproj" |> MSBuildRelease buildIosDir "Build" |> Log "BuildLib-Output: "
+    !! "**/TinyRest.iOS.Core.fsproj" |> MSBuildRelease buildIosDir "Build" |> Log "BuildLib-Output: "
 )
 
 Target "BuildIIS" (fun _ ->
@@ -234,18 +231,36 @@ Target "PublishNugets" (fun _ ->
 if hasBuildParam "target" && environVar "target" = "PublishNugets"
 then publishNuget <- true
 
+
+//if isMacOs
+//then
 "Clean"
     ==> "BuildPCL"
+
     ==> "CreatePclPackage"
     ==> "BuildLib"
     ==> "CreateLibPackage"
-    ==> "BuildIIS"
-    ==> "CreateIISPackage"
+
     ==> "BuildDroid"
     ==> "CreateDroidPackage"
+
     ==> "BuildIos"
     ==> "CreateIosPackage"
+
     ==> "PublishNugets"
+//else
+//    "Clean"
+//    ==> "BuildPCL"
+//    ==> "CreatePclPackage"
+//    ==> "BuildLib"
+//    ==> "CreateLibPackage"
+//    ==> "BuildIIS"
+//    ==> "CreateIISPackage"
+//    ==> "BuildDroid"
+//    ==> "CreateDroidPackage"
+//    ==> "BuildIos"
+//    ==> "CreateIosPackage"
+//    ==> "PublishNugets"
 
 RunTargetOrDefault "CreateIosPackage"
 //RunTargetOrDefault "CreateLibPackage"

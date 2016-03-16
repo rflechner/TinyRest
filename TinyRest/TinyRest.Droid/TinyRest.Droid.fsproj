@@ -83,8 +83,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
       <Name>TinyRest.Pcl259</Name>
-      <Project>{18431b00-4d93-4180-8d95-6342d24b0f82}</Project>
-      <Private>True</Private>
+      <Project>{18431B00-4D93-4180-8D95-6342D24B0F82}</Project>
     </ProjectReference>
   </ItemGroup>
 </Project>
