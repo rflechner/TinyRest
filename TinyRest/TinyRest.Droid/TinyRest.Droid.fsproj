@@ -73,17 +73,17 @@
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
-      <Name>TinyRest.Pcl259</Name>
-      <Project>{18431B00-4D93-4180-8D95-6342D24B0F82}</Project>
+    <ProjectReference Include="..\TinyRest-PCL\TinyRest-PCL.fsproj">
+      <Project>{934B5323-D59F-49BC-AC5C-ECAA5CE10803}</Project>
+      <Name>TinyRest-PCL</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -39,24 +39,28 @@
       <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TinyRest-PCL\Http.fs">
+      <Link>Http.fs</Link>
+    </Compile>
+    <Compile Include="..\TinyRest-PCL\Routing.fs">
+      <Link>Routing.fs</Link>
+    </Compile>
+    <Compile Include="..\TinyRest-PCL\TinyRestPcl.fs">
+      <Link>TinyRestPcl.fs</Link>
+    </Compile>
     <Compile Include="TinyRestServer.fs" />
     <Compile Include="TinyRestServerCSharp.fs" />
     <None Include="packages.config" />
     <None Include="Script1.fsx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TinyRest.Pcl259\TinyRest.Pcl259.fsproj">
-      <Name>TinyRest.Pcl259</Name>
-      <Project>{18431B00-4D93-4180-8D95-6342D24B0F82}</Project>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -74,7 +78,7 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

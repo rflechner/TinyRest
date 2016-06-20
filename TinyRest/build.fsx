@@ -17,17 +17,18 @@ let buildIISDir = "./buildIIS/"
 let packagingDir = "./packaging/"
 let packagingRoot = "./packagingRoot/"
 
-buildPclDir |> ensureDirectory
-buildLibDir |> ensureDirectory
-buildDroidDir |> ensureDirectory
-buildIosDir |> ensureDirectory
-buildIISDir |> ensureDirectory
+ensureDirectory buildPclDir
+ensureDirectory buildLibDir
+ensureDirectory buildDroidDir
+ensureDirectory buildIosDir
+ensureDirectory buildIISDir
+ensureDirectory packagingDir
+ensureDirectory packagingRoot
 
-packagingDir |> ensureDirectory
-packagingRoot |> ensureDirectory
+let trim (s:string) = s.Trim()
 
-let keyFile = @"C:\keys\nuget-romcyber.txt"
-let nugetApiKey = if keyFile |> fileExists then keyFile |> ReadFileAsString else ""
+let keyFile = __SOURCE_DIRECTORY__ @@ "../../nuget_key.txt"
+let nugetApiKey = trim <| if keyFile |> fileExists then keyFile |> ReadFileAsString else ""
 tracefn "Nuget API key is '%s'" nugetApiKey
 let mutable publishNuget = false
 let pclVersion = nextVersion (fun arg -> { arg with PackageName="TinyRest-PCL" })

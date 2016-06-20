@@ -1,8 +1,15 @@
-﻿<Properties StartupItem="TinyRest.CSharpExample/TinyRest.CSharpExample.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.AVD_GalaxyNexus_ToolsForApacheCordova" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+﻿<Properties StartupItem="TinyRest.CSharpExample/TinyRest.CSharpExample.csproj" StartupConfiguration="{A150BFF4-DFDB-4B0C-AD7F-DB1E7BFF544D}|Default">
+  <MonoDevelop.Ide.ItemProperties.TinyRest.ConsoleExample PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="build.fsx">
+    <Files>
+      <File FileName="TinyRest.Droid/TinyRestServer.fs" Line="13" Column="31" />
+      <File FileName="build.fsx" Line="22" Column="8" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.TinyRest.CSharpExample PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
