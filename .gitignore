@@ -15,3 +15,5 @@ packages/
 *.vs/*
 TinyRest/.fake/*
 TinyRest/.vs/TinyRest/v14/.suo
+TinyRest/.vs/TinyRest/v14/.suo
+*.userprefs

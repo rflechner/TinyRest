@@ -27,24 +27,14 @@ ensureDirectory packagingRoot
 
 let trim (s:string) = s.Trim()
 
-let keyFile = __SOURCE_DIRECTORY__ @@ "../../nuget_key.txt"
+//let keyFile = __SOURCE_DIRECTORY__ @@ "../../nuget_key.txt"
+let keyFile = @"C:\keys\nuget-romcyber.txt"
 let nugetApiKey = trim <| if keyFile |> fileExists then keyFile |> ReadFileAsString else ""
 tracefn "Nuget API key is '%s'" nugetApiKey
-let mutable publishNuget = false
+//let mutable publishNuget = false
 let pclVersion = nextVersion (fun arg -> { arg with PackageName="TinyRest-PCL" })
 
-Target "Clean" (fun _ ->
-    CleanDir buildPclDir
-    CleanDir buildLibDir
-    CleanDir buildDroidDir
-    CleanDir buildIosDir
-    CleanDir buildIISDir
-
-    CleanDir packagingDir
-    CleanDir packagingRoot
-)
-
-Target "CreatePclPackage" (fun _ ->
+let createPclPackage publishNuget =
     CleanDir packagingDir
     let packFiles = buildPclDir |> directoryInfo |> filesInDir |> Seq.map (fun f -> f.FullName) |> Seq.filter (fun f -> f.Contains "TinyRest_PCL.dll")
     CopyFiles packagingDir packFiles
@@ -66,9 +56,8 @@ Target "CreatePclPackage" (fun _ ->
                 Dependencies = []
              }) 
             "TinyRest.nuspec"
-)
 
-Target "CreateLibPackage" (fun _ ->
+let createLibPackage publishNuget =
     CleanDir packagingDir
     let packFiles = buildLibDir 
                         |> directoryInfo 
@@ -98,9 +87,8 @@ Target "CreateLibPackage" (fun _ ->
                                ]
              })
             "TinyRest.nuspec"
-)
 
-Target "CreateIISPackage" (fun _ ->
+let createIISPackage publishNuget =
     CleanDir packagingDir
     let packFiles = buildIISDir 
                         |> directoryInfo 
@@ -129,9 +117,8 @@ Target "CreateIISPackage" (fun _ ->
                                ]
              })
             "TinyRest.nuspec"
-)
 
-Target "CreateDroidPackage" (fun _ ->
+let createDroidPackage publishNuget =
     CleanDir packagingDir
     let packFiles = buildDroidDir
                         |> directoryInfo 
@@ -160,9 +147,8 @@ Target "CreateDroidPackage" (fun _ ->
                                ]
              })
             "TinyRest.nuspec"
-)
 
-Target "CreateIosPackage" (fun _ ->
+let createIosPackage publishNuget =
     CleanDir packagingDir
     let packFiles = buildIosDir
                         |> directoryInfo 
@@ -193,6 +179,30 @@ Target "CreateIosPackage" (fun _ ->
                                ]
              })
             "TinyRest.nuspec"
+let packNugets publish =
+    createPclPackage publish
+    createLibPackage publish
+    createIISPackage publish
+    createDroidPackage publish
+    createIosPackage publish
+
+Target "Clean" (fun _ ->
+    CleanDir buildPclDir
+    CleanDir buildLibDir
+    CleanDir buildDroidDir
+    CleanDir buildIosDir
+    CleanDir buildIISDir
+
+    CleanDir packagingDir
+    CleanDir packagingRoot
+)
+
+Target "PackNugets" (fun _ ->
+    packNugets false
+)
+
+Target "PublishNugets" (fun _ ->
+    packNugets true
 )
 
 Target "BuildPCL" (fun _ ->
@@ -225,45 +235,15 @@ Target "BuildIIS" (fun _ ->
     !! "**/TinyRest.IIS.fsproj" |> MSBuildRelease buildIISDir "Build" |> Log "BuildIIS-Output: "
 )
 
-Target "PublishNugets" (fun _ ->
-    trace "Nugets published"
-)
-
-if hasBuildParam "target" && environVar "target" = "PublishNugets"
-then publishNuget <- true
-
-
-//if isMacOs
-//then
 "Clean"
     ==> "BuildPCL"
-
-    ==> "CreatePclPackage"
     ==> "BuildLib"
-    ==> "CreateLibPackage"
-
+    ==> "BuildIIS"
     ==> "BuildDroid"
-    ==> "CreateDroidPackage"
-
     ==> "BuildIos"
-    ==> "CreateIosPackage"
-
+    ==> "PackNugets"
     ==> "PublishNugets"
-//else
-//    "Clean"
-//    ==> "BuildPCL"
-//    ==> "CreatePclPackage"
-//    ==> "BuildLib"
-//    ==> "CreateLibPackage"
-//    ==> "BuildIIS"
-//    ==> "CreateIISPackage"
-//    ==> "BuildDroid"
-//    ==> "CreateDroidPackage"
-//    ==> "BuildIos"
-//    ==> "CreateIosPackage"
-//    ==> "PublishNugets"
 
-RunTargetOrDefault "CreateIosPackage"
-//RunTargetOrDefault "CreateLibPackage"
+RunTargetOrDefault "PackNugets"
 
 
